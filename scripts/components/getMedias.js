@@ -85,8 +85,6 @@
         mediaLikes.appendChild(iconDiv);
         iconDiv.appendChild(likeIcon);
         myArticle.appendChild(mediaDetails)
-
-
     }
 }
 

@@ -6,7 +6,6 @@ getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-E
 .then(
  response => {
 
-
     //Etape 1: Recuperer Profil
     let listPhotographers = []
     listPhotographers = response.photographers;
@@ -22,7 +21,6 @@ getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-E
     });
 
     // console.log(myPhotgrapher)
-
 
     //Etape 2: Recuperer liste Media
     let listMedia = [];
