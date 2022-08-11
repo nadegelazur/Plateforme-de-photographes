@@ -1,4 +1,3 @@
-
 let params = new URLSearchParams(document.location.search);
 let idParams = params.get("id");
 
@@ -49,6 +48,7 @@ getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-E
 
     calculTotalLike()
 
+    openLightBox()
   }
 )
 
@@ -74,6 +74,8 @@ getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-E
   btnDate.addEventListener("click", () => {
     sortByDate()
   })
+
+  
 
 
 

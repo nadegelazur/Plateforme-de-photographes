@@ -19,6 +19,8 @@
             // myImg.setAttribute("src", "/assets/medias/" + profil.name + "/" + media.image);
             
             myLien.setAttribute("class", "article-image");
+            myLien.setAttribute("href", `assets/medias/${profil.name}/${media.image}`);
+
             //alert(media.id);
         
             myLien.appendChild(mediaImg);
@@ -29,6 +31,7 @@
             mediaVideo.src = `assets/medias/${profil.name}/${media.video}`;
             mediaVideo.type = "video/mp4";
             myLien.setAttribute("class", "article-video");
+            myLien.setAttribute("href", `assets/medias/${profil.name}/${media.video}`);
 
             //play button
             const playButton = document.createElement('button')
