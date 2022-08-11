@@ -1,0 +1,202 @@
+/* || general styles */
+@import url('profil.css');
+
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/* 
+-- Couleurs --
+
+Primary:
+        burgundy: #901C1C;
+        coral: #D3573C;
+*/
+
+html {
+    font-family: "DM Sans", sans-serif;
+  }
+  
+body {
+    margin: 0 70px;
+}
+
+/*** HEADER ***/
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;   
+}
+.logo {
+    display: block;
+    width: 150px;
+    height: 40px;
+}
+h1 { 
+    color: #901C1C;
+    font-weight: 300;
+    font-size: 36px;
+}
+
+/*** SECTION ARTICLEs ***/
+
+.photographer-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 70px;
+    column-gap: 185px;
+    margin-top: 100px;
+}
+
+.photographer-section article {
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.photographer-section article h2 {
+    color:#D3573C;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 46.87px;
+    margin-top: 20px;
+}
+.photographer-section article h3 {
+    color: 
+    #901C1C;
+    font-size: 13px;
+    line-height: 16.93px;
+}
+.photographer-section article p:first-child {
+    font-size: 10px;
+    line-height: 13.02px;
+    color: #000;
+
+}
+.photographer-section article p:last-child {
+    font-size: 9px;
+    color: #757575;
+    line-height: 11.72px;
+}
+
+.photographer-section article a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.photographer-section article img {
+    object-fit: cover;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+ 
+/* FORMULAIRE d'INSCRIPTION */
+.modalForm {
+    border-radius: 5px;
+    background-color: #DB8876;
+    width: 50%;
+    height: 89%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: 0 auto;
+}
+
+.modalForm header {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modalForm header img {
+    cursor: pointer;
+}
+
+.modalForm header h2 {
+    font-size: 64px;
+    font-weight: normal;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form label {
+    color: #312E2E;
+    font-size: 25px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* on le remonte de -50% de sa hoteur */
+    padding-left: 8px;
+    transition: all 0.3s ease-out;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: self-start;
+    margin-bottom: 26px;
+}
+.data__form {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    margin-bottom: 55px;
+}
+.data__form span {
+    position: absolute;
+    left: 5px;
+    top: 70px;
+    color: white;
+    text-shadow: 1px 2px 2px red;
+    display: none;
+}
+.input-control {
+    width: 100%;
+    height: 68px;
+    padding: 25px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 25px;
+    transition: border 0.2s ease-out;
+}
+#textarea {
+    height: 170px;
+}
+/* Animation */
+
+.data__form:focus-within label,
+.data__form.active-input label {
+    top: -20px;
+    padding-left: 2px;
+}
+.data__form:focus-within .input-control,
+.data__form.active-input .input-control {
+    border: 2px solid #901c1cad;
+    box-shadow: 0 0 15px #901c1c4e;
+}
+.erreur {
+    border: 2px solid red!important;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.59)!important;
+}
+.visible {
+    display: block!important;
+}
+
+

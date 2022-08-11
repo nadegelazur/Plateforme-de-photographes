@@ -1,0 +1,38 @@
+function getHeader (profils, id) {
+    const photographHeader = document.querySelector('.photograph-header');
+    // Current photographer
+    let profil = profils.find(item => item.id == id);
+    //alert(profil.name);
+    
+    const myDiv1 = document.createElement('div');
+    const myH2 = document.createElement( 'h2' );
+    const myH3 = document.createElement( 'h3' );    
+    const myPara1 = document.createElement( 'p' );
+    const myPara2 = document.createElement( 'p' );
+
+    myPara2.setAttribute("id", "totalLike");
+  
+    myDiv1.setAttribute("class", "profil-title");
+  
+    myH2.textContent = profil.name;
+    myH3.textContent = `${profil.city} , ${profil.country}`;
+    myPara1.textContent = profil.tagline;
+    myPara2.textContent = "";
+  
+    photographHeader.appendChild(myDiv1);
+    myDiv1.appendChild(myH2);
+    myDiv1.appendChild(myH3);
+    myDiv1.appendChild(myPara1);
+    myDiv1.appendChild(myPara2);
+  
+    const myDiv2 = document.createElement('div');
+    const myImg = document.createElement( 'img' );
+  
+    myDiv2.setAttribute("class", "profil-photo");
+    myImg.setAttribute("src", "assets/photographers/" + profil.portrait);
+    myImg.setAttribute("class", "photo");
+    
+  
+    photographHeader.appendChild(myDiv2);
+    myDiv2.appendChild(myImg);
+  }

@@ -1,0 +1,449 @@
+@import url('style.css');
+:root {
+    --modal-duration: 0.8s;
+}
+/*** HEADER ***/
+.logo{
+    display: block;
+}
+/*** MAIN ***/
+.photograph-header {
+    background-color: #FAFAFA;
+    height: 300px;
+    /* margin: 0 70px; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;   
+}
+.profil-title h2 {
+    color: #D3573C;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 64px;
+} 
+.profil-title h3,
+.media-title h3{
+    color: #901C1C;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 40.25px;
+}
+.profil-title p {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 50.44px;
+    color: #525252;
+}
+.profil-photo {
+    order: 3;
+}
+.profil-photo img {
+    object-fit: cover;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+.contact_button,
+.send_button {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+    order: 2;
+}
+ 
+.contact_button:hover,
+.send_button:hover {
+    background-color: #710c0c;
+}
+/*** FILTERS ***/
+.photograph-filter {
+    display: flex;
+    font-size: 18px;
+}
+.photograph-filter p{
+    font-weight: bold;
+    margin-top: 10px;
+}
+.photograph-filter .dropdown {
+    position: absolute;
+    left: 155px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    background: #901C1C;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 0;
+}
+.photograph-filter .dropdown .toggle-listbox {
+    position: relative;
+    width: 130px;
+}
+.photograph-filter .dropdown .toggle-listbox p {
+    padding: 10px 0;
+    
+}
+.photograph-filter .dropdown .toggle-listbox i {
+    position: absolute;
+    top: 23px;
+    right: 10px;
+    color: #fff;
+}
+.photograph-filter .fa-angle-up {
+    display: none;
+}
+.photograph-filter .dropdown button {
+    font-family: inherit;
+    border: unset;
+    background: inherit;
+    font-size: inherit;
+    color: #fff;
+    padding: 20px 0px;
+    width: 130px;
+    text-align: start;
+    display: none;
+    cursor: pointer;
+}
+.portfolio-filter .dropdown > button:first-of-type {
+    border-top:1px solid #fff; 
+    border-bottom:1px solid #fff
+}
+
+/*** GALLERY IMAGES ***/
+.photograph-content { 
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.photograph-content img,  .photograph-content video{
+    object-fit: cover;
+    object-position: 0% 0%;
+    border-radius: 0.4em;
+    height: 300px;
+    width: 350px;
+    cursor: pointer;
+}
+img.hover-shadow {
+    transition: 0.3s;
+}
+  
+.hover-shadow:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.media-title {
+    display: flex;
+    justify-content: space-between;
+}
+.media-likes {
+    display: flex;
+    align-items: center;
+}
+.media-title p,
+.media-likes span {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+    color: #911C1C;
+}
+.icon-div {
+    padding-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.icon-div i{
+    color: #911C1C;
+    font-size: 21px;
+}
+/*** LIGHTBOX ***/
+#lightbox {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #80808080;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    animation: lightboxIn .5s;
+}
+#lightbox.show{
+    display: block;
+}
+.lightbox__next,
+.lightbox__prev {
+    border: none;
+    background: url(../assets/logo_icons/arrow.svg) center center/ 48px 29.64px no-repeat;
+    width: 50px;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    margin-top: -14px;
+    z-index: 11;
+    opacity: .5;
+    text-indent: -3000px;
+    cursor: pointer;
+    transition: .3s;
+}
+.lightbox__next:hover,
+.lightbox__prev:hover,
+.lightbox__close:hover {
+    opacity: 1;
+}
+.lightbox__prev {
+    right: auto;
+    left: 0;
+    transform: rotate(180deg);
+}
+.lightbox__close {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: url(../assets/logo_icons/close.svg) center center / 46px 46px no-repeat transparent;
+    position: fixed;
+    text-indent: -3000px;
+    top: 20px;
+    right: 17px;
+    opacity: .5;
+    cursor: pointer;
+    z-index: 12;
+} 
+.lightbox-content img {
+    max-width: 100%;
+    width: 50%;
+    height: auto;
+    animation: lightboxIn .5s;
+}
+.lightbox-content {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    margin-left: 50px;
+    margin-right: 50px;
+    min-height: 100vh;
+    margin-top: 10px;
+}
+
+@keyframes lightboxIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+  
+
+/*** FORMULAIRE d'INSCRIPTION ***/
+#contact-form {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(26, 39, 156, 0.4);
+}
+.modalForm {
+    border-radius: 5px;
+    background-color: #DB8876;
+    width: 699px;
+    height: 130%;
+    box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.43);
+    margin: 5% auto;
+    overflow: hidden;
+    position: relative;
+
+    animation-name: modalopen;
+    animation-duration: var(--modal-duration);
+}
+
+.modalForm header {
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.modalForm header img {
+    cursor: pointer;
+    order: 2;
+}
+
+.modalForm header h2 {
+    font-size: 64px;
+    font-weight: normal;
+    text-align: center;
+}
+.header-name {
+    position: absolute;
+    top: 100px;
+}
+form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form label {
+    color: #312E2E;
+    font-size: 25px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* on le remonte de -50% de sa hoteur */
+    padding-left: 8px;
+    transition: all 0.3s ease-out;
+}
+#textArea {
+    top: 15%;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: self-start;
+    margin-bottom: 26px;
+}
+.data__form {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    margin-bottom: 55px;
+}
+.data__form span {
+    position: absolute;
+    left: 5px;
+    top: 70px;
+    color: white;
+    text-shadow: 1px 2px 2px red;
+    display: none;
+}
+.input-control {
+    width: 100%;
+    height: 68px;
+    padding: 25px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 25px;
+    transition: border 0.2s ease-out;
+}
+#textarea {
+    height: 170px;
+}
+/*** Animation ***/
+
+.data__form:focus-within label,
+.data__form.active-input label {
+    top: -20px;
+    padding-left: 2px;
+}
+.data__form:focus-within .input-control,
+.data__form.active-input .input-control {
+    border: 2px solid #901c1cad;
+    box-shadow: 0 0 15px #901c1c4e;
+}
+.erreur {
+    border: 2px solid red!important;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.59)!important;
+}
+.visible {
+    display: block!important;
+}
+
+
+/* Dropdown */
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .dd-button {
+    display: inline-block;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 10px 30px 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  .dd-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+  }
+  
+  .dd-input {
+    display: none;
+  }
+  
+  .dd-menu {
+    position: absolute;
+    top: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0;
+    margin: 2px 0 0 0;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    list-style-type: none;
+    background: #901c1c;
+
+  }
+  
+  .dd-input + .dd-menu {
+    display: none;
+  } 
+  
+  .dd-input:checked + .dd-menu {
+    display: block;
+  } 
+  
+  .dd-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  
+  .dd-menu li a {
+    display: block;
+    margin: -10px -20px;
+    padding: 10px 20px;
+  }
+  
+  .dd-menu li.divider{
+    padding: 0;
+    border-bottom: 1px solid #cccccc;
+  }
+
+/**** animation ****/
+
+@keyframes modalopen {
+    from {
+      opacity: 0;
+      transform: translateY(-150px);
+    }
+    to {
+      opacity: 1;
+    }
+  }
