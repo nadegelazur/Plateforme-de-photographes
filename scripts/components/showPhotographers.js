@@ -15,10 +15,12 @@ export function showPhotographers(obj) {
         const myH3 = document.createElement( 'h3' );    
         const myPara1 = document.createElement( 'p' );    
         const myPara2 = document.createElement( 'p' );
+        
 
         myLien.setAttribute("href", "profil.html?id=" + photographer.id);
         myImg.setAttribute("src", "/assets/photographers/" + photographer.portrait);
         myImg.setAttribute("class", "photo");
+        
     
         myH2.textContent = photographer.name;
         myH3.textContent = `${photographer.city} , ${photographer.country}`;

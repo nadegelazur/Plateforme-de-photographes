@@ -34,6 +34,34 @@
     line-height: 50.44px;
     color: #525252;
 }
+/*** TOTAL LIKES ***/
+aside {
+    display: block;
+}
+aside > div {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    right: 40px;
+    width: 376px;
+    height: 86px;
+    background: #DB8876;
+    padding: 20px 30px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 24px;
+}
+.info-ttlikes, 
+.info-prix {
+    display: flex;
+    align-items: center;
+}
+
+#totalLike {
+    padding: 10px;
+  }
+
 .profil-photo {
     order: 3;
 }
@@ -116,6 +144,7 @@
     border-top:1px solid #fff; 
     border-bottom:1px solid #fff
 }
+
 
 /*** GALLERY IMAGES ***/
 .photograph-content { 

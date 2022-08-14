@@ -1,5 +1,4 @@
-
- function getMedias(id, profil, medias) {
+function getMedias(id, profil, medias) {
     const photographContent = document.querySelector('.photograph-content');
     
     const photographerMedias = medias.filter(media => media.photographerId == id);
@@ -88,7 +87,12 @@
         mediaLikes.appendChild(iconDiv);
         iconDiv.appendChild(likeIcon);
         myArticle.appendChild(mediaDetails)
+
+
+        
     }
+
+    
 }
 
 

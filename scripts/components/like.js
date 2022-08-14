@@ -3,11 +3,9 @@ function clickBtnLike(evt) {
     let btnHeart = evt.currentTarget
     console.log(btnHeart)
 
-
     let parentNode = btnHeart.parentNode
     console.log(parentNode)
     
-
     nbLike = parentNode.firstChild.textContent;
     nbLikeInt = parseInt(nbLike)
     
@@ -25,7 +23,6 @@ function clickBtnLike(evt) {
     likeIcon.setAttribute("class", "fa-solid fa-heart");
     iconDiv.appendChild(likeIcon);
 
-
     parentNode.appendChild(iconDiv);
 
     calculTotalLike();
@@ -38,7 +35,6 @@ function clickBtnDislike(evt) {
     let parentNode = btnHeart.parentNode
     console.log(parentNode)
     
-
     nbLike = parentNode.firstChild.textContent;
     nbLikeInt = parseInt(nbLike)
     
@@ -56,11 +52,9 @@ function clickBtnDislike(evt) {
     likeIcon.setAttribute("class", "fa-regular fa-heart");
     iconDiv.appendChild(likeIcon);
 
-
     parentNode.appendChild(iconDiv);
 
     calculTotalLike();
-
 
 }
 
@@ -86,10 +80,11 @@ function calculTotalLike() {
         (previousValue, currentValue) => previousValue + currentValue
       );
 
-
+    
     document.getElementById("totalLike").innerHTML = ""
 
-    document.getElementById("totalLike").innerHTML = totatLike + " Nb Like Total"
+    // document.getElementById("totalLike").innerHTML = totatLike + " Nb Like Total"
+    document.getElementById("totalLike").innerHTML = totatLike;
 
 
     return totatLike;

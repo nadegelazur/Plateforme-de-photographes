@@ -48,7 +48,9 @@ getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-E
 
     calculTotalLike()
 
-    openLightBox()
+    //LightBox.init()
+
+    
   }
 )
 
@@ -75,7 +77,7 @@ getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-E
     sortByDate()
   })
 
-  
+//openLightBox()  
 
 
 

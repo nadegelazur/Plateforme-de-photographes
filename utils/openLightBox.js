@@ -93,12 +93,17 @@
 // }
 
 // openLightBox()
-
+/**
+ * @property {HTMLElement} element
+ */
 class LightBox {
 
     static init() {
-        const links = document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')
-        .forEach(link => link.addEventListener('click', e => {
+        // Array.from - transform list en tableau
+        const links = Array.from(document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]'))
+        //const gallery = links.map(link => link.getAttribute('href'))
+
+        links.forEach(link => link.addEventListener('click', e => {
             e.preventDefault()
             new LightBox(e.currentTarget.getAttribute('href'))
         }))
@@ -107,8 +112,51 @@ class LightBox {
  * @param {string} url URL de l'image/video
  */
     constructor (url) {
-        const element = this.buildDom(url)
-        document.body.appendChild(element)
+        this.element = this.buildDom(url)
+        this.loadImage(url)
+        this.onKeyUp = this.onKeyUp.bind(this)
+        document.body.appendChild(this.element)
+        document.addEventListener('keyup', this.onKeyUp)
+    }
+
+    loadImage(url) {
+       
+        const image = new Image();
+        const content = this.element.querySelector('.lightbox-content');
+        
+        const loader = document.createElement('div');
+        //console.log(loader)
+        loader.classList.add('lightbox__loader');
+        content.appendChild(loader)
+        image.onload = function () {
+            //console.log('chargé')
+            content.removeChild(loader)
+            content.appendChild(image)
+        }
+        image.src = url
+    }
+
+    
+    /**
+     * keybord event esc
+     * @param {KeyboardEvent} e 
+     */
+    onKeyUp(e) {
+        if(e.key === 'Escape') {
+            this.close(e)
+        }
+    }
+    /**
+     * Ferme la lightbox
+     * @param {mouseEvent} e 
+     */
+    close(e) {
+        e.preventDefault()
+        this.element.classList.add('fadeOut')
+        window.setTimeout(() => {
+            this.element.parentElement.removeChild(this.element)
+        }, 500)
+        document.removeEventListener('keyup', this.onKeyUp)
 
     }
 /**
@@ -118,24 +166,30 @@ class LightBox {
     buildDom (url) {
         const dom = document.createElement('div')
         dom.classList.add('lightbox')
-        dom.innerHTML = `<button class="lightbox__close">Fermer</button>
-                         <button class="lightbox__next">Suivant</button>
-                         <button class="lightbox__prev">Précédent</button>
-                         <div class="lightbox-content">
-                            <img src="assets/medias/Ellie-Rose Wilkens/Sport_Next_Hold.jpg" alt="">
-                         </div>`
+
+         dom.innerHTML = `<button class="lightbox__close">Fermer</button>
+                        <button class="lightbox__next">Suivant</button>
+                        <button class="lightbox__prev">Précédent</button>
+                        <div class="lightbox-content">
+                        
+                        </div>`
+        
+        dom.querySelector('.lightbox__close').addEventListener('click',
+        this.close.bind(this)) // pour que phis à l'interier du CLOSE fasse la reference à notre instance de lightbox et non pas à l'element sur laquel on viens de clicker // 
         return dom
     }
 }
 /**
  * 
  */
-{/* <div id="lightbox">
-    <button class="lightbox__close">Fermer</button>
-    <button class="lightbox__next">Suivant</button>
-    <button class="lightbox__prev">Précédent</button>
-    <div class="lightbox-content">
-    <img src="assets/medias/Ellie-Rose Wilkens/Sport_Next_Hold.jpg" alt="">
+{/* <div class="lightbox">
+          <button class="lightbox__close">Fermer</button>
+            <button class="lightbox__next">Suivant</button>
+            <button class="lightbox__prev">Précédent</button>
+            <div class="lightbox-content">
+              <img src="assets/medias/Ellie-Rose Wilkens/Sport_Next_Hold.jpg" alt="">
+            </div>
     </div>
-</div> */}
+    <img src="${url}" alt=""> */
+}
 LightBox.init()
