@@ -2,8 +2,7 @@ function getHeader (profils, id) {
     const photographHeader = document.querySelector('.photograph-header');
     // Current photographer
     let profil = profils.find(item => item.id == id);
-    //alert(profil.name);
-
+  
     const myDiv1 = document.createElement('div');
     const myH2 = document.createElement( 'h2' );
     const myH3 = document.createElement( 'h3' );    
@@ -14,7 +13,6 @@ function getHeader (profils, id) {
     myH3.textContent = `${profil.city} , ${profil.country}`;
     myPara1.textContent = profil.tagline;
     
-  
     photographHeader.appendChild(myDiv1);
     myDiv1.appendChild(myH2);
     myDiv1.appendChild(myH3);
@@ -37,11 +35,11 @@ function getHeader (profils, id) {
      */
     const main = document.getElementById("main");
     const asideInfo = document.createElement("aside");
-    //asideInfo.classList.add("profil__info");
+    const divAside = document.createElement("div");
 
-    const divAside = document.createElement("div")
     const divInfoLikes = document.createElement("div");
-    divInfoLikes.setAttribute("class", "info-ttlikes")
+    divInfoLikes.setAttribute("class", "info-ttlikes");
+
     const divPrixJour = document.createElement("div");
     divPrixJour.setAttribute("class", "info-prix")
 
