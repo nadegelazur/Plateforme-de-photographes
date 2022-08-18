@@ -155,7 +155,8 @@ aside > div {
     gap: 10px;
 }
 
-.photograph-content img,  .photograph-content video{
+.photograph-content img,
+.photograph-content video {
     object-fit: cover;
     object-position: 0% 0%;
     border-radius: 0.4em;
@@ -389,6 +390,19 @@ form div {
     padding: 0;
     border-bottom: 1px solid #cccccc;
   }
+/*** Video ***/ 
+.article-video,
+.article-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+.play-circle {
+    font-size: 42px;
+    color: #901C1C; 
+    position: absolute;  
+} 
+
 
 /**** animation ****/
 

@@ -49,9 +49,9 @@ getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-E
     calculTotalLike()
 
     LightBox.init()
-
     
   }
+  
 )
 
 //VOIR BUG: btn title & date ne marche pas sur profil Ellie-Rose Wilkens
@@ -77,7 +77,7 @@ getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-E
     sortByDate()
   })
 
-//openLightBox()  
+ 
 
 
 

@@ -1,99 +1,24 @@
-/**
- * @property {HTMLElement} lightbox
- * @property {string[]} gallery => (images)Tableau de chaînes de caractères
- * @property {string} url une chaîne de caractère / image actuellment affichée
- */
 class LightBox {
 
     static init() {
-        // Array.from - transform list en tableau
-        const links = Array.from(document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]'))
-        const gallery = links.map(link => link.getAttribute('href'))
-        
-        links.forEach(link => link.addEventListener('click', e => {
+
+        document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')
+        .forEach(link => link.addEventListener('click', e => {
             e.preventDefault()
-            new LightBox(e.currentTarget.getAttribute('href'), gallery)
-        }))   
+            new LightBox(e.currentTarget.getAttribute('href'))
+        }))    
     }
 /**
  * @param {string} url URL de l'image/video
- * @param {string[]} gallery Chemins des images de la lighbox
  */
-    constructor (url, gallery) {        
-        this.lightbox = this.buildDom(url)
-        this.gallery = gallery
-        this.loadImage(url)
-        this.onKeyUp = this.onKeyUp.bind(this)
-        document.body.appendChild(this.lightbox)
-        document.addEventListener('keyup', this.onKeyUp)
-    }
-    loadImage(url) {
-        this.url = null;
-        const image = new Image();
-        const content = this.lightbox.querySelector('.lightbox-content');    
-        const loader = document.createElement('div');
-        //console.log(loader)
-        loader.classList.add('lightbox__loader');
-        content.innerHTML = "";
-        content.appendChild(loader)
-        image.onload = () => {
-            //console.log('chargé')
-            content.removeChild(loader)
-            content.appendChild(image)
-            this.url = url;
-        }
-        image.src = url
-    }
-    /**
-     * keybord event esc
-     * @param {KeyboardEvent} e 
-     */
-    onKeyUp(e) {
-        if(e.key === 'Escape') {
-            this.close(e)
-        } else if (e.key === 'ArrowLeft') {
-            this.prev(e)
-        } else if (e.key === 'ArrowRight') {
-            this.next(e)
-        }
-    }
-    /**
-     * Ferme la lightbox
-     * @param { mouseEvent/KeyboarsEvent } e 
-     */
-    close(e) {
-        e.preventDefault()
-        this.lightbox.classList.add('fadeOut')
-        window.setTimeout(() => {
-            this.lightbox.parentElement.removeChild(this.lightbox)
-        }, 500)
-        document.removeEventListener('keyup', this.onKeyUp)
-    }
-    /**
-     * Next de la lightbox
-     * @param { mouseEvent/KeyboarsEvent } e 
-     */
-    next(e) {
-        e.preventDefault();
-        let i = this.gallery.findIndex(image => image === this.url)
-        // this.gallery.length -1 - last image of Gallery
-        if( i === this.gallery.length -1) {
-            i = -1;
-        }
-        this.loadImage(this.gallery[i + 1])
-    }
-    /**
-     * Previos de la lightbox
-     * @param { mouseEvent/KeyboarsEvent } e 
-     */
-    prev(e) {
-        e.preventDefault()
-        let i = this.gallery.findIndex(image => image === this.url)
-        if( i === 0) {
-            i = this.gallery.length;
-        }
-        this.loadImage(this.gallery[i -1 ])
+    constructor (url) {
+        const element = this.buildDom(url)
+        document.body.appendChild(element)
 
+        //creation des listeners
+        this.closeBtn();
+        this.nextBtn();
+        this.preventBtn();
 
     }
 /**
@@ -104,31 +29,179 @@ class LightBox {
         const dom = document.createElement('div')
         dom.classList.add('lightbox')
 
-         dom.innerHTML = `<button class="lightbox__close">Fermer</button>
-                        <button class="lightbox__next">Suivant</button>
-                        <button class="lightbox__prev">Précédent</button>
-                        <div class="lightbox-content"></div>`
-                        
-        dom.querySelector('.lightbox__close').addEventListener('click',
-        this.close.bind(this)) // pour que phis à l'interier du CLOSE fasse la reference à notre instance de lightbox et non pas à l'element sur laquel on viens de clicker // 
-        dom.querySelector('.lightbox__next').addEventListener('click',
-        this.next.bind(this))
-        dom.querySelector('.lightbox__prev').addEventListener('click',
-        this.prev.bind(this))
+
+        if(url.includes("jpg")) { 
+            dom.innerHTML = `<button class="lightbox__close">Fermer</button>
+                         <button class="lightbox__next">Suivant</button>
+                         <button class="lightbox__prev">Précédent</button>
+                         <div class="lightbox-content">
+                            <img src="`+url+`" alt="" id="currentMedia">
+                         </div>`
+        }
+        else {
+            dom.innerHTML = `<button class="lightbox__close">Fermer</button>
+                         <button class="lightbox__next">Suivant</button>
+                         <button class="lightbox__prev">Précédent</button>
+                         <div class="lightbox-content">
+                         <video controls width="250">
+                            <source src="`+url+`"
+                                    type="video/mp4" id="currentMedia">
+                            Sorry, your browser doesn't support embedded videos.
+                        </video>
+                         </div>`
+        }      
         return dom
     }
+
+    nextBtn() {
+
+        let btnNext = document.getElementsByClassName("lightbox__next")[0] 
+        
+        let nextMedia = ""
+
+        btnNext.addEventListener('click', function() {
+            
+
+                    let media = document.getElementById('currentMedia');
+                    let currentUrl = media.getAttribute('src')
+
+                    let list =  document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')
+                    let length = list.length
+
+                    list.forEach(
+                        (link, index) => {
+
+                            if(link.getAttribute('href') == currentUrl && index < length-1) 
+                            {
+
+                            nextMedia = document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')[index+1].getAttribute('href')
+
+                            if(nextMedia.includes('jpg')) {
+
+                                let container = document.getElementsByClassName('lightbox-content');
+                                let child = container[0].lastElementChild; 
+                                while (child) {
+                                    container[0].removeChild(child);
+                                    child = container[0].lastElementChild;
+                                    }
+                                let img = document.createElement('img'); 
+                                img.setAttribute("src", nextMedia);
+                                img.setAttribute("id", "currentMedia")
+                                container[0].appendChild(img)
+
+                            }   
+                            else                         
+                            {
+                                let container = document.getElementsByClassName('lightbox-content');
+                                let child = container[0].lastElementChild; 
+                                while (child) {
+                                    container[0].removeChild(child);
+                                    child = container[0].lastElementChild;
+                                    }
+
+                                let video = document.createElement('video');
+                                let source = document.createElement('source');
+
+                                source.setAttribute('src', nextMedia);
+                                source.setAttribute('type', 'video/mp4');
+                                source.setAttribute("id", "currentMedia")
+
+                                video.appendChild(source);
+                                container[0].appendChild(video)
+                                video.play();
+                            }   
+
+
+                            }
+
+                        }
+                    );
+                                
+                }) 
+
+    }
+
+    preventBtn() {
+
+        let btnPrev = document.getElementsByClassName("lightbox__prev")[0] 
+        let prevMedia = ""
+
+        btnPrev.addEventListener('click', function(e) {
+
+            let media = document.getElementById('currentMedia');
+            let currentUrl = media.getAttribute('src')
+
+                    let list =  document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')
+
+                    list.forEach(
+                        (link, index) => {
+
+
+                            if(link.getAttribute('href') == currentUrl && index > 0) 
+                            {
+
+                        
+
+                            prevMedia = document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')[index-1].getAttribute('href')
+
+                            if(prevMedia.includes('jpg')) {
+
+                                let container = document.getElementsByClassName('lightbox-content');
+                                let child = container[0].lastElementChild; 
+                                while (child) {
+                                    container[0].removeChild(child);
+                                    child = container[0].lastElementChild;
+                                    }
+                                let img = document.createElement('img'); 
+                                img.setAttribute("src", prevMedia);
+                                img.setAttribute("id", "currentMedia")
+                                container[0].appendChild(img)
+
+                            }   
+                            else                         
+                            {
+                                let container = document.getElementsByClassName('lightbox-content');
+                                let child = container[0].lastElementChild; 
+                                while (child) {
+                                    container[0].removeChild(child);
+                                    child = container[0].lastElementChild;
+                                    }
+
+                                let video = document.createElement('video');
+                                let source = document.createElement('source');
+
+                                source.setAttribute('src', prevMedia);
+                                source.setAttribute('type', 'video/mp4');
+                                source.setAttribute("id", "currentMedia")
+
+                                video.appendChild(source);
+                                container[0].appendChild(video)
+                                video.play();
+                            }   
+
+
+                            }
+
+                        }
+                    );
+                                
+                    currentUrl = prevMedia;
+                }) 
+
+    }
+
+    closeBtn() {
+
+        let btnClose = document.getElementsByClassName("lightbox__close")[0]    
+        btnClose.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log(btnClose);
+                    // lightBox.classList.remove("show");
+                    document.getElementsByClassName("lightbox")[0].remove()
+                }) 
+
+    }
+   
 }
-/**
- * 
- */
-{/* <div class="lightbox">
-          <button class="lightbox__close">Fermer</button>
-            <button class="lightbox__next">Suivant</button>
-            <button class="lightbox__prev">Précédent</button>
-            <div class="lightbox-content">
-              <img src="assets/medias/Ellie-Rose Wilkens/Sport_Next_Hold.jpg" alt="">
-            </div>
-    </div>
-    <img src="${url}" alt=""> */
-}
-LightBox.init()
+
+

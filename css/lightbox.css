@@ -4,7 +4,8 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: #eae3e3ed;
+    background-color: #ffffff;
+    color: #901C1C;
     top: 0px;
     left: 0px;
     z-index: 10;
@@ -67,21 +68,42 @@
 } 
 .lightbox-content {
     display: flex;
-    align-items: center;
+    /* padding: 60px 0px; */
+    font-size: 24px;
     justify-content: center;
-    margin: 50px auto;
+    align-items: center;
+    margin: 0 auto;
     min-height: 100vh;
-   
+    width: 50%;
+    height: auto;
+    align-content: center; 
 }
-.lightbox-content img {
-    
+.lightbox-content img,
+.lightbox-content video {   
     max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0.3em;
     width: 50%;
     height: auto;
     animation: lightboxIn .5s;
-}
+    object-fit: contain;
+} 
 @keyframes lightboxIn {
     from {opacity: 0;}
     to {opacity: 1;}
+}
+
+/*** stylisation du scroll bar ***/
+::-webkit-scrollbar {
+    width: 7px;
+}
+/* color of backgraund  */
+::-webkit-scrollbar-track {
+    background: #fff;
+    padding: 1px;
+}
+::-webkit-scrollbar-thumb {
+    background: #9ca2b0;
+    border-radius: 4px;
 }
   
