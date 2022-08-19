@@ -48,7 +48,7 @@ getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-E
 
     calculTotalLike()
 
-    LightBox.init()
+    LightBox.init();
     
   }
   
