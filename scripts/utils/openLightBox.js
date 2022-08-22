@@ -46,24 +46,33 @@ class LightBox {
         dom.setAttribute("tabindex", "-1");
  
         if(url.includes("jpg")) { 
-            dom.innerHTML = `<button class="lightbox__close">Fermer</button>
-                         <button class="lightbox__next">Suivant</button>
-                         <button class="lightbox__prev">Précédent</button>
-                         <div class="lightbox-content">
-                            <img src="`+url+`" alt="" id="currentMedia">
-                            <h3 id="currentTitle">`+title+`<h3>
-                         </div>`
+            dom.innerHTML = `
+                <div class="lightbox-left">
+                    <button class="lightbox__prev" aria-label="Image précédente">Précédent</button>
+                </div>   
+                <div class="lightbox-content">
+                    <div>
+                        <img src="`+url+`" alt="" id="currentMedia">
+                        <h3 id="currentTitle">`+title+`<h3>
+                    </div>
+                </div> 
+                <div class="lightbox-right">
+                    <button class="lightbox__close" aria-label="Fermer la lightbox">Fermer</button>
+                    <button class="lightbox__next" aria-label="Image suivante">Suivant</button>
+                </div>`
         } else {
-            dom.innerHTML = `<button class="lightbox__close">Fermer</button>
-                         <button class="lightbox__next">Suivant</button>
-                         <button class="lightbox__prev">Précédent</button>
+            dom.innerHTML = `<button class="lightbox__close" aria-label="Fermer la lightbox">Fermer</button>
+                         <button class="lightbox__next" "Image suivante">Suivant</button>
+                         <button class="lightbox__prev" aria-label="Image précédente">Précédent</button>
                          <div class="lightbox-content">
-                            <video controls width="250">
-                                <source src="`+url+`"
-                                        type="video/mp4" id="currentMedia">
-                                Sorry, your browser doesn't support embedded videos.
-                            </video>
-                            <h3 id="currentTitle">`+title+`<h3>
+                            <div>
+                                <video control="" aria-label="`+title+`">
+                                    <source src="`+url+`"
+                                            type="video/mp4" id="currentMedia">
+                                    Sorry, your browser doesn't support embedded videos.
+                                </video>
+                                <h3 id="currentTitle">`+title+`<h3>
+                            </div>
                          </div>`
         }         
         return dom
@@ -94,14 +103,16 @@ class LightBox {
                             container[0].removeChild(child);
                             child = container[0].lastElementChild;
                             }
+                        let div = document.createElement('div');    
                         let img = document.createElement('img'); 
                         let h3 = document.createElement('h3');
                         h3.textContent = linkMedia.firstChild.getAttribute('alt');
 
                         img.setAttribute("src", nextMedia);
                         img.setAttribute("id", "currentMedia")
-                        container[0].appendChild(img)
-                        container[0].appendChild(h3)
+                        container[0].appendChild(div)
+                        div.appendChild(img)
+                        div.appendChild(h3)
                     } else {                                   
                         let container = document.getElementsByClassName('lightbox-content');
                         let child = container[0].lastElementChild; 
@@ -109,6 +120,7 @@ class LightBox {
                             container[0].removeChild(child);
                             child = container[0].lastElementChild;
                             }
+                        let div = document.createElement('div');    
                         let video = document.createElement('video');
                         let source = document.createElement('source');
                         let h3 = document.createElement('h3');
@@ -119,8 +131,10 @@ class LightBox {
                         source.setAttribute("id", "currentMedia")
 
                         video.appendChild(source);
-                        container[0].appendChild(video);
-                        container[0].appendChild(h3);
+                        container[0].appendChild(div);
+                        div.appendChild(video);
+                        div.appendChild(video);
+                        div.appendChild(h3);
                         video.play();
                     }   
                 }
@@ -149,13 +163,15 @@ class LightBox {
                                     container[0].removeChild(child);
                                     child = container[0].lastElementChild;
                                     }
+                                let div = document.createElement('div');
                                 let img = document.createElement('img'); 
                                 let h3 = document.createElement('h3');
                                 h3.textContent = linkMedia.firstChild.getAttribute('alt');
                                 img.setAttribute("src", prevMedia);
                                 img.setAttribute("id", "currentMedia")
-                                container[0].appendChild(img)
-                                container[0].appendChild(h3)
+                                container[0].appendChild(div)
+                                div.appendChild(img)
+                                div.appendChild(h3)
                             } else {                        
                                 let container = document.getElementsByClassName('lightbox-content');
                                 let child = container[0].lastElementChild; 
@@ -163,6 +179,7 @@ class LightBox {
                                     container[0].removeChild(child);
                                     child = container[0].lastElementChild;
                                     }
+                                let div = document.createElement('div');
                                 let video = document.createElement('video');
                                 let source = document.createElement('source');
 
@@ -174,8 +191,9 @@ class LightBox {
                                 source.setAttribute("id", "currentMedia")
 
                                 video.appendChild(source);
-                                container[0].appendChild(video)
-                                container[0].appendChild(h3)
+                                container[0].appendChild(div)
+                                div.appendChild(video)
+                                div.appendChild(h3)
                                 video.play();
                             }  
                         }
