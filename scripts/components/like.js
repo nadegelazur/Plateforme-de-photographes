@@ -17,6 +17,9 @@ function clickBtnLike(evt) {
     //On ajoute le coeur rempli
     const iconDiv = document.createElement('div');
     iconDiv.setAttribute("class","icon-div");
+    iconDiv.setAttribute("aria-label","liké");
+    iconDiv.setAttribute("tabIndex","0");
+    iconDiv.setAttribute("role","button");
     iconDiv.addEventListener('click', (event) => clickBtnDislike(event))
     
     const likeIcon = document.createElement('i');
@@ -46,6 +49,9 @@ function clickBtnDislike(evt) {
     //On ajoute le coeur vide
     const iconDiv = document.createElement('div');
     iconDiv.setAttribute("class","icon-div");
+    iconDiv.setAttribute("aria-label","disliké");
+    iconDiv.setAttribute("tabIndex","0");
+    iconDiv.setAttribute("role","button");
     iconDiv.addEventListener('click', (event) => clickBtnLike(event))
     
     const likeIcon = document.createElement('i');

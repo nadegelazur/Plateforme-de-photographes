@@ -26,6 +26,7 @@ function getHeader (profils, id) {
     myDiv2.setAttribute("class", "profil-photo");
     myImg.setAttribute("src", "assets/photographers/" + profil.portrait);
     myImg.setAttribute("class", "photo");
+    myImg.setAttribute("alt", "photo de profile");
     
     photographHeader.appendChild(myDiv2);
     myDiv2.appendChild(myImg);

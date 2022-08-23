@@ -50,6 +50,7 @@ function getMedias(id, profil, medias) {
             
             //play button
             const playButton = document.createElement('button')
+            playButton.setAttribute("role", "play")
             playButton.textContent = "play";
 
             mediaVideo.appendChild(playButton)
@@ -97,6 +98,9 @@ function getMedias(id, profil, medias) {
 
         const iconDiv = document.createElement('div');
         iconDiv.setAttribute("class","icon-div");
+        iconDiv.setAttribute("aria-label","likes");
+        iconDiv.setAttribute("tabIndex","0");
+        iconDiv.setAttribute("role","button");
         iconDiv.addEventListener('click', (event) => clickBtnLike(event))
         
         const likeIcon = document.createElement('i');

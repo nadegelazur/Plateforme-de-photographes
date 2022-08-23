@@ -22,19 +22,22 @@
         <!-- Section FILTER -->
         <div class="photograph-filter">
           <p>Trier par</p>
-
           <label class="dropdown">
 
-            <div class="dd-button">
+            <div class="dd-button" role="button" tabindex="0" aria-label="liste de tri, trié par popularité"
+            aria-haspopup=”listbox” aria-expanded>
               Choisir valeur
             </div>
           
             <input type="checkbox" class="dd-input" id="test">
           
             <ul class="dd-menu">
-              <li id="popularite">Popularité</li>
-              <li id="titre">Titre</li>
-              <li id="date">Date</li>
+              <li id="popularite" role=”listbox” tabindex="0" aria-label="trié par popularité"
+              aria-activedescendant="false" aria-selected="false">Popularité</li>
+              <li id="titre" value="title" role=”listbox” tabindex="0" aria-label="trié par titre"
+              aria-activedescendant="false" aria-selected="false">Titre</li>
+              <li id="date" value="date" role=”listbox” tabindex="0" aria-label="trié par date"
+              aria-activedescendant="false" aria-selected="false">Date</li>
             </ul>
             
           </label>
