@@ -18,6 +18,7 @@ function getMedias(id, profil, medias) {
             mediaImg.setAttribute("role","link");
             mediaImg.setAttribute("tabIndex","0");
             mediaImg.setAttribute("alt", `${media.title}`);
+        
 
             // myImg.setAttribute("src", "/assets/medias/" + profil.name + "/" + media.image);
             
