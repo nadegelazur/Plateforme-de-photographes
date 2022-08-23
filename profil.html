@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/profil.css" rel="stylesheet" type="text/css"/>
     <link href="css/lightbox.css" rel="stylesheet" type="text/css"/>
@@ -10,9 +10,11 @@
   </head>
   <body>
     <header>
-        <img src="assets/logo_icons/logo.png" class="logo" />
+      <a href="index.html" aria-label="redirige vers la page d'accueil">
+        <img src="assets/logo_icons/logo.png" alt="Fisheye Home page"" aria-label="logo" class="logo" />
+      </a>
     </header>
-    <main id="main">
+    <main id="main" role="main" aria-label="main">
         <div class="photograph-header">
           <!-- <button class="contact_button" onclick="displayModal()" >Contactez-moi</button> -->
           <button class="contact_button">Contactez-moi</button>
@@ -44,25 +46,27 @@
         
         <!-- Section FORMULAIRE DE CONTACT --> 
         <div id="contact-form">
-          <div class="modalForm">
+          <div class="modalForm" role="dialog" aria-labelledby="modal-Title" tabindex="-1">
               <header class="modal-header">
                   <h2>Contactez-moi</h2>
-                  <img src="assets/logo_icons/close.svg" onclick="closeModal()" />
+                  <img src="assets/logo_icons/close.svg" onclick="closeModal()" role="button" tabindex="-1" aria-label="Fermer le formulaire de contact"/>
               </header>
               <form id="form" name="contactForm">
                   <div class="data__form">
-                      <label for="name" id="firstName">Prénom</label>
-                      <input id="name" class="input-control" type="text"/>
+                      <label for="name" id="firstName" area-label="FirstName">Prénom</label>
+                      <input id="name" class="input-control" type="text" name="first" required
+                      aria-required="true"/>
                       <span></span>
                   </div>
                   <div class="data__form">
-                      <label for="nom" id="lastName">Nom</label>
-                      <input id="nom" class="input-control" type="text"/>
+                      <label for="nom" id="lastName" area-label="lastName">Nom</label>
+                      <input id="nom" class="input-control" type="text" name="last" required
+                      aria-required="true"/>
                       <span></span>
                   </div>
                   <div class="data__form">
-                      <label for="email" id="email">Email</label>
-                      <input id="email" class="input-control" type="email" name="email"/>
+                      <label for="email" id="email" aria-label="Email">Email</label>
+                      <input id="email" class="input-control" type="email" name="email" required aria-required="true"/>
                       <span></span>
                   </div>
                   <div class="data__form">
@@ -70,7 +74,7 @@
                       <textarea id="textarea" class="input-control" type="text" name="message"></textarea> 
                       <span></span>
                   </div><!-- -->
-                  <button class="contact_button">Envoyer</button>
+                  <button class="contact_button" role="button" aria-roledescription="Envoyer" >Envoyer</button>
               </form>
           </div>  
         </div>   
