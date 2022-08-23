@@ -45,6 +45,8 @@ function getMedias(id, profil, medias) {
             const iconPlay = document.createElement('i');
             iconPlay.setAttribute("class", "fa-solid fa-circle-play");
             spanVideo.appendChild(iconPlay);
+
+            myArticle.style.zIndex = "-1";
             
             //play button
             const playButton = document.createElement('button')
