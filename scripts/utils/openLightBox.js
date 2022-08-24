@@ -18,6 +18,7 @@ class LightBox {
 
         document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')
         .forEach(link => link.addEventListener('click', e => {
+            console.log('ok')
             e.preventDefault()
             const title = e.currentTarget.firstChild.getAttribute('alt');
             new LightBox(e.currentTarget.getAttribute('href'), title);
@@ -61,19 +62,24 @@ class LightBox {
                     <button class="lightbox__next" aria-label="Image suivante">Suivant</button>
                 </div>`
         } else {
-            dom.innerHTML = `<button class="lightbox__close" aria-label="Fermer la lightbox">Fermer</button>
-                         <button class="lightbox__next" "Image suivante">Suivant</button>
-                         <button class="lightbox__prev" aria-label="Image précédente">Précédent</button>
-                         <div class="lightbox-content">
-                            <div>
-                                <video control="" aria-label="`+title+`">
-                                    <source src="`+url+`"
-                                            type="video/mp4" id="currentMedia">
-                                    Sorry, your browser doesn't support embedded videos.
-                                </video>
-                                <h3 id="currentTitle">`+title+`<h3>
-                            </div>
-                         </div>`
+            dom.innerHTML = `
+                <div class="lightbox-left">
+                    <button class="lightbox__prev" aria-label="Image précédente">Précédent</button>
+                </div>
+                <div class="lightbox-content">
+                    <div>
+                        <video control="" aria-label="`+title+`">
+                            <source src="`+url+`"
+                                    type="video/mp4" id="currentMedia">
+                            Sorry, your browser doesn't support embedded videos.
+                        </video>
+                        <h3 id="currentTitle">`+title+`<h3>
+                    </div>
+                </div>
+                <div class="lightbox-right">
+                    <button class="lightbox__close" aria-label="Fermer la lightbox">Fermer</button>
+                    <button class="lightbox__next" aria-label="Image suivante">Suivant</button>
+                </div>`                
         }         
         return dom
     }
