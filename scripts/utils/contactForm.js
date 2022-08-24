@@ -9,7 +9,7 @@ async function getName() {
     const profils = objets.photographers;
     // Current photographer
     let profil = profils.find(item => item.id == id);
-        //alert(profil.name);
+    //alert(profil.name);
 
     const modalHeader = document.querySelector('.modal-header');
     const h2 = document.createElement( 'h2' );
