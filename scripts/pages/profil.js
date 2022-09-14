@@ -1,86 +1,115 @@
-let params = new URLSearchParams(document.location.search);
-let idParams = params.get("id");
+import { getData } from '../pages/data.js'
+import { getHeader } from '../components/getHeader.js'
+import { mediaFactory } from '../factories/media.js'
+import { calculTotalLike } from '../components/like.js'
+import { sortByTitle, sortByDate, sortByPopularity } from '../components/filter.js'
 
+import { LightBox } from '../utils/openLightBox.js'
+
+const params = new URLSearchParams(document.location.search)
+const idParams = params.get('id')
+
+// getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-End-Fisheye/main/data/photographers.json')
 getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-End-Fisheye/main/data/photographers.json')
-.then(
- response => {
+  .then(
+    response => {
+      // Etape 1: Recuperer Profil
+      let listPhotographers = []
+      listPhotographers = response.photographers
+      // console.log(listPhotographers)
 
-    //Etape 1: Recuperer Profil
-    let listPhotographers = []
-    listPhotographers = response.photographers;
-    // console.log(listPhotographers)
+      let myPhotgrapher = {}
 
-    myPhotgrapher = {};
+      listPhotographers.forEach(photograph => {
+        if (photograph.id === idParams) {
+          myPhotgrapher = photograph
+        }
+      })
 
-    listPhotographers.forEach(photograph => {
-      if(photograph.id == idParams) {
-        // console.log("true")
-       myPhotgrapher = photograph
-      }
-    });
+      // console.log(myPhotgrapher)
 
-    // console.log(myPhotgrapher)
+      // 1. profil
+      getHeader(listPhotographers, idParams)
 
-    //Etape 2: Recuperer liste Media
-    let listMedia = [];
-    listMedia = response.media;
-    // console.log(listMedia)
-    
-    // console.log(idParams)
-    listMediaOfPhotographer = [];
+      // Etape 2: Recuperer liste Media
+      let listMedia = []
+      listMedia = response.media
+      // console.log(listMedia)
 
-    listMedia.forEach(media => {
-      if(media.photographerId == idParams) {
-        // console.log("true")
-        listMediaOfPhotographer.push(media)
-      }
-    });
+      // console.log(idParams)
+      const listMediaOfPhotographer = []
 
-    // console.log(listMediaOfPhotographer)
+      listMedia.forEach((media) => {
+        if (media.photographerId == idParams) {
+        // console.log(media)
+          mediaFactory(media)
+        }
+      })
 
-    //J'affiche mes elements au DOM
+      // listPhotographers.forEach(element => {
+      //     console.log(element)
+      //     let section = document.getElementsByClassName("photographer-section")[0];
+      //     let art = photographerFactory(element).getUserCardDOM();
 
-    //1. profil
-    getHeader(listPhotographers, idParams)
+      //     section.appendChild(art);
 
-    //2. liste des medias
-    getMedias(idParams, myPhotgrapher, listMediaOfPhotographer)
+      // });
 
-    calculTotalLike()
+      // console.log(listMediaOfPhotographer)
 
-    LightBox.init();
-    
-  }
-  
-)
+      // J'affiche mes elements au DOM
 
-//VOIR BUG: btn title & date ne marche pas sur profil Ellie-Rose Wilkens
+      // 2. liste des medias
+      // getMedias(idParams, myPhotgrapher, listMediaOfPhotographer)
 
-  //btn filter by popularity
-  let btnPopularity = document.getElementById("popularite");
+      calculTotalLike()
 
-  btnPopularity.addEventListener("click", () => {
-    sortByPopularity()
-  })
+      LightBox.init()
+    }
 
-  //btn filter by title
-  let btnTitle = document.getElementById("titre");
+  )
 
-  btnTitle.addEventListener("click", () => {
-    sortByTitle()
-  })
+// btn filter by popularity
+const btnPopularity = document.getElementById('popularity')
 
-  //btn filter by date
-  let btnDate = document.getElementById("date");
+btnPopularity.addEventListener('click', () => {
+  sortByPopularity()
+})
 
-  btnDate.addEventListener("click", () => {
-    sortByDate()
-  })
+// btn filter by title
+const btnTitle = document.getElementById('titre')
 
- 
+btnTitle.addEventListener('click', () => {
+  sortByTitle()
+})
 
+// btn filter by date
+const btnDate = document.getElementById('date')
 
+btnDate.addEventListener('click', () => {
+  sortByDate()
+})
 
+const filterBy = document.querySelector('.dd-button')
+const filterMenu = document.querySelector('.dd-menu')
+const arrow = document.querySelector('.arrow')
 
+// const listbox = document.querySelector('[role="listbox"]')
 
+let previousActiveElement
 
+filterBy.addEventListener('click', function () {
+  showDropdown()
+})
+filterBy.addEventListener('keydown', showDropdown)
+
+arrow.addEventListener('click', showDropdown)
+arrow.addEventListener('keydown', showDropdown)
+
+function showDropdown () {
+  filterMenu.classList.toggle('open-menu')
+  arrow.classList.toggle('active')
+  previousActiveElement = document.activeElement
+  console.log(previousActiveElement)
+  document.querySelector('popularity').focus()
+}

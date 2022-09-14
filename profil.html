@@ -3,6 +3,7 @@
   <head>
     <link href="css/profil.css" rel="stylesheet" type="text/css"/>
     <link href="css/lightbox.css" rel="stylesheet" type="text/css"/>
+    <link href="css/formContact.css" rel="stylesheet" type="text/css"/>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/logo_icons/logo.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -10,33 +11,36 @@
   </head>
   <body>
     <header>
-      <a href="index.html" aria-label="redirige vers la page d'accueil">
-        <img src="assets/logo_icons/logo.png" alt="Fisheye Home page"" aria-label="logo" class="logo" />
+      <a href="index.html" aria-label="lien de navigation redirige vers la page d'accueil" class="logo-lien" tabindex="1">
+        <img src="assets/logo_icons/logo.png" alt="logo de FishEye - lien vers la page d’accueil" aria-label="logo" class="logo" />
       </a>
     </header>
-    <main id="main" role="main" aria-label="main">
+    <main id="main" role="main" aria-label="main" aria-hidden="false">
         <div class="photograph-header">
           <!-- <button class="contact_button" onclick="displayModal()" >Contactez-moi</button> -->
-          <button class="contact_button">Contactez-moi</button>
+          <button id="contact_button" tabindex="2">Contactez-moi</button>
         </div> 
         <!-- Section FILTER -->
         <div class="photograph-filter">
           <p>Trier par</p>
-          <label class="dropdown">
 
-            <div class="dd-button" role="button" tabindex="0" aria-label="liste de tri, trié par popularité"
-            aria-haspopup=”listbox” aria-expanded>
+          <label class="dropdown">
+            <div class="dd-button" role="button" tabindex="3" aria-label="liste de tri, trié par popularité"
+            aria-haspopup="true" aria-expanded="false">
               Choisir valeur
             </div>
+            <span class="dd-button__arrow arrow"></span>
           
-            <input type="checkbox" class="dd-input" id="test">
+            <!-- <input type="checkbox" class="dd-input" id="test"> -->
           
-            <ul class="dd-menu">
-              <li id="popularite" role=”listbox” tabindex="0" aria-label="trié par popularité"
+            <ul class="dd-menu" role="listbox">
+              <li id="popularity" role="option" tabindex="4" aria-label="trié par popularité"
               aria-activedescendant="false" aria-selected="false">Popularité</li>
-              <li id="titre" value="title" role=”listbox” tabindex="0" aria-label="trié par titre"
+
+              <li id="titre" value="title" role="option" tabindex="5" aria-label="trié par titre"
               aria-activedescendant="false" aria-selected="false">Titre</li>
-              <li id="date" value="date" role=”listbox” tabindex="0" aria-label="trié par date"
+
+              <li id="date" value="date" role="option" tabindex="6" aria-label="trié par date"
               aria-activedescendant="false" aria-selected="false">Date</li>
             </ul>
             
@@ -44,57 +48,59 @@
           
         </div> 
         <!-- Section GALLERY --> 
-        <div class="photograph-content"></div> 
-        <!-- Section LIGHTBOX --> 
+        <div class="photograph-content"></div>  
         
         <!-- Section FORMULAIRE DE CONTACT --> 
         <div id="contact-form">
-          <div class="modalForm" role="dialog" aria-labelledby="modal-Title" tabindex="-1">
+          <div class="modalForm" role="dialog" aria-labelledby="coordonnees" aria-hidden="true"  tabindex="-1">
               <header class="modal-header">
                   <h2>Contactez-moi</h2>
-                  <img src="assets/logo_icons/close.svg" onclick="closeModal()" role="button" tabindex="-1" aria-label="Fermer le formulaire de contact"/>
+                  <img src="assets/logo_icons/close.svg" role="button" tabindex="-1" aria-label="Fermer le formulaire de contact" id="close_button"/>
               </header>
-              <form id="form" name="contactForm">
+
+              <form id="form" name="contactForm" action="#">
                   <div class="data__form">
-                      <label for="name" id="firstName" area-label="FirstName">Prénom</label>
-                      <input id="name" class="input-control" type="text" name="first" required
+                      <label for="name" id="firstName" aria-label="FirstName">Prénom</label>
+                      <input tabindex="1" id="name" class="input-control i-1" type="text" name="first" placeholder="Jean" required
                       aria-required="true"/>
-                      <span></span>
+                      <span class="error"></span>
                   </div>
                   <div class="data__form">
-                      <label for="nom" id="lastName" area-label="lastName">Nom</label>
-                      <input id="nom" class="input-control" type="text" name="last" required
+                      <label for="nom" id="lastName" aria-label="lastName">Nom</label>
+                      <input tabindex="2" id="nom" class="input-control i-2" type="text" name="last" placeholder="Dupont" required
                       aria-required="true"/>
-                      <span></span>
+                      <span class="error"></span>
                   </div>
                   <div class="data__form">
-                      <label for="email" id="email" aria-label="Email">Email</label>
-                      <input id="email" class="input-control" type="email" name="email" required aria-required="true"/>
-                      <span></span>
+                      <label for="email" id="mail" aria-label="Email">Email</label>
+                      <input tabindex="3" id="email" class="input-control i-3" type="email" name="email" placeholder="jean.dupont@gmail.com" required aria-required="true"/>
+                      <span class="error"></span>
                   </div>
                   <div class="data__form">
-                      <label for="textarea" id="textArea">Votre message</label>
-                      <textarea id="textarea" class="input-control" type="text" name="message"></textarea> 
-                      <span></span>
-                  </div><!-- -->
-                  <button class="contact_button" role="button" aria-roledescription="Envoyer" >Envoyer</button>
+                      <label for="message" id="textArea" aria-label="Message">Votre message</label>
+                      <textarea tabindex="4" id="textarea" class="input-control i-4" type="text" name="message" placeholder="Je prends contact avec vous..."></textarea> 
+                      <span class="error"></span>
+                  </div>
+                <button tabindex="5" id="send_button" role="button" aria-roledescription="Envoyer" >Envoyer</button>
               </form>
+
           </div>  
-        </div>   
+        </div>  
       </main>
     <!-- <script src="script.js"></script> -->
-    <script src="scripts/pages/data.js"></script> 
-    <script src="scripts/components/getMedias.js"></script> 
-    <script src="scripts/components/getHeader.js"></script> 
-    <script src="scripts/components/like.js"></script> 
-    <script src="scripts/components/filter.js"></script> 
+    <script type="module" src="scripts/pages/data.js"></script> 
+    <script type="module" src="scripts/factories/media.js"></script> 
 
-    <script src="./scripts/pages/profil.js"></script>
-    <script src="./scripts//utils/openLightBox.js" defer></script> 
-    
+    <script type="module"  src="scripts/components/getHeader.js"></script> 
+    <script type="module" src="scripts/components/like.js"></script> 
+    <script type="module" src="scripts/components/filter.js"></script> 
+
+    <script type="module" src="./scripts/pages/profil.js"></script>
+    <script type="module" src="scripts/utils/openLightBox.js" defer></script> 
+    <script src="./scripts/utils/inert.js"></script>
     
     <!-- <script src="utils/body-scroll-lock.js" type="module"></script> -->
-    <script src="./scripts/utils//contactForm.js"></script>
+    <script type="module" src="scripts/utils/contactForm.js"></script>
     <script src="https://kit.fontawesome.com/73e0b520f9.js"></script> 
     
   </body>

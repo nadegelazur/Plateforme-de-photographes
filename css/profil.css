@@ -71,8 +71,7 @@ aside > div {
     height: 200px;
     width: 200px;
 }
-.contact_button,
-.send_button {
+#contact_button{
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -92,60 +91,150 @@ aside > div {
     background-color: #710c0c;
 }
 /*** FILTERS ***/
-.photograph-filter {
+/* .photograph-filter {
     display: flex;
     font-size: 18px;
-}
-.photograph-filter p{
+
+.photograph-filter p {
     font-weight: bold;
     margin-top: 10px;
 }
-.photograph-filter .dropdown {
-    position: absolute;
-    left: 155px;
-    display: flex;
-    flex-direction: column;
-    padding: 0 10px;
-    background: #901C1C;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 0;
-}
-.photograph-filter .dropdown .toggle-listbox {
+.dropdown {
     position: relative;
-    width: 130px;
-}
-.photograph-filter .dropdown .toggle-listbox p {
-    padding: 10px 0;
-    
-}
-.photograph-filter .dropdown .toggle-listbox i {
-    position: absolute;
-    top: 23px;
-    right: 10px;
+    line-height: 2.5;
+    list-style: none !important;
+    border: 1px solid #911C1C;
+    border-radius: 5px;
+    background: #911C1C;
     color: #fff;
-}
-.photograph-filter .fa-angle-up {
-    display: none;
-}
-.photograph-filter .dropdown button {
-    font-family: inherit;
-    border: unset;
-    background: inherit;
-    font-size: inherit;
-    color: #fff;
-    padding: 20px 0px;
-    width: 130px;
-    text-align: start;
-    display: none;
+    width: 170px;
+    height: 170px;
     cursor: pointer;
+    margin: 9px;
+    padding: 11px 19px;
+    z-index: 2;    
 }
-.portfolio-filter .dropdown > button:first-of-type {
-    border-top:1px solid #fff; 
-    border-bottom:1px solid #fff
+    .dropdown-label {
+        position: absolute;
+    } 
+
+.dropdown__arrow {
+    position: absolute;
+    right: 21px;
+    top: 18%;
+    transition: transform 0.2s linear;
+}
+.dropdown__arrow .expanded {
+    transform: rotate(-180deg);
 }
 
+.dropdown__list {
+    list-style: none !important;
+}
+.dropdown__list li:nth-child(1),
+.dropdown__list li:nth-child(2) {
+    border-bottom: 1px solid #fff;
+}
+
+*/
+/* Dropdown */
+.photograph-filter {
+    display: flex;
+    padding: 20px 0px;
+    font-size: 18px;
+}
+.photograph-filter p {
+    font-weight: bold;
+}
+.dropdown {
+    display: inline-block;
+    position: relative;
+    margin-left: 15px;
+} 
+.dd-button {
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 30px 10px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    background: #901c1c;
+    color: #fff;
+}
+.arrow { 
+    width: 0;
+    height: 0;
+    border-top: 7px solid #fff;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    position: absolute;
+    right: 5px;
+    top: 45%;
+}
+.arrow.active {
+    transform: rotate(-180deg);
+}
+.dd-button__arrow {}
+
+/* .dd-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgb(251, 249, 249);
+} */
+.dd-input {
+    display: none;
+}
+.dd-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    width: 156px;
+    border-radius: 5px;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    list-style-type: none;
+    background: #901c1c;
+    z-index: 20;
+}
+.dd-menu.open-menu {
+    display: block;
+}
+/*.dd-input + .dd-menu {
+    display: none;
+} 
+ .dd-input:checked + .dd-menu {
+    display: block;
+} */
+.dd-menu ul {
+    border: none;
+}
+.dd-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #fff;
+}
+.dd-menu li:nth-child(1),
+.dd-menu li:nth-child(2) {
+    border-bottom: 1px solid #fff;
+}
+.dd-menu li a {
+    display: block;
+    margin: -10px -20px;
+    padding: 10px 20px;
+}
+.dd-menu li.divider {
+    padding: 0;
+    border-bottom: 1px solid #cccccc;
+}
 
 /*** GALLERY IMAGES ***/
 .photograph-content { 
@@ -199,199 +288,7 @@ img.hover-shadow {
     font-size: 21px;
 }
  
-/*** FORMULAIRE d'INSCRIPTION ***/
-#contact-form {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0px;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-    background-color: rgba(26, 39, 156, 0.4);
-}
-.modalForm {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 699px;
-    height: 105%;
-    box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.43);
-    margin: 5% auto;
-    overflow: hidden;
-    position: relative;
 
-    animation-name: modalopen;
-    animation-duration: var(--modal-duration);
-}
-
-.modalForm header {
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 100px;
-}
-
-.modalForm header img {
-    cursor: pointer;
-    order: 2;
-}
-
-.modalForm header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
-}
-.header-name {
-    position: absolute;
-    top: 100px;
-}
-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-form label {
-    color: #312E2E;
-    font-size: 25px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%); /* on le remonte de -50% de sa hoteur */
-    padding-left: 8px;
-    transition: all 0.3s ease-out;
-}
-#textArea {
-    top: 15%;
-}
-
-form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
-}
-.data__form {
-    width: 100%;
-    max-width: 600px;
-    position: relative;
-    margin-bottom: 55px;
-}
-.data__form span {
-    position: absolute;
-    left: 5px;
-    top: 70px;
-    color: white;
-    text-shadow: 1px 2px 2px red;
-    display: none;
-}
-.input-control {
-    width: 100%;
-    height: 68px;
-    padding: 25px;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    font-size: 25px;
-    transition: border 0.2s ease-out;
-}
-#textarea {
-    height: 170px;
-}
-/*** Animation ***/
-
-.data__form:focus-within label,
-.data__form.active-input label {
-    top: -20px;
-    padding-left: 2px;
-}
-.data__form:focus-within .input-control,
-.data__form.active-input .input-control {
-    border: 2px solid #901c1cad;
-    box-shadow: 0 0 15px #901c1c4e;
-}
-.erreur {
-    border: 2px solid red!important;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.59)!important;
-}
-.visible {
-    display: block!important;
-}
-
-
-/* Dropdown */
-
-.dropdown {
-    display: inline-block;
-    position: relative;
-  }
-  
-  .dd-button {
-    display: inline-block;
-    border: 1px solid gray;
-    border-radius: 4px;
-    padding: 10px 30px 10px 20px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  
-  .dd-button:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    width: 0; 
-    height: 0; 
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid black;
-  }
-  
-  .dd-input {
-    display: none;
-  }
-  
-  .dd-menu {
-    position: absolute;
-    top: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 0;
-    margin: 2px 0 0 0;
-    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
-    list-style-type: none;
-    background: #901c1c;
-    z-index: 20;
-
-  }
-  
-  .dd-input + .dd-menu {
-    display: none;
-  } 
-  
-  .dd-input:checked + .dd-menu {
-    display: block;
-  } 
-  
-  .dd-menu li {
-    padding: 10px 20px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  
-  
-  .dd-menu li a {
-    display: block;
-    margin: -10px -20px;
-    padding: 10px 20px;
-  }
-  
-  .dd-menu li.divider{
-    padding: 0;
-    border-bottom: 1px solid #cccccc;
-  }
 /*** Video ***/ 
 .article-video,
 .article-image {

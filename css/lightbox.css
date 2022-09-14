@@ -27,7 +27,7 @@
     opacity: .5;
     color: #901C1C;
     background:url(../assets/logo_icons/loader.svg) center center no-repeat;
-    margin-top: 28%;
+    margin-top: 46%;
 }
 .lightbox .lightbox-left,.lightbox-right {
     display: flex;
@@ -39,7 +39,6 @@
 }
 .lightbox__next,
 .lightbox__prev {
-
     border: none;
     background: url(../assets/logo_icons/arrow.svg) center center/ 30px 58px no-repeat;
     width: 200px;
@@ -84,6 +83,7 @@
     padding: 60px 0px;
     font-size: 24px;
     justify-content: center;
+    z-index: 20;
 }
 .lightbox .lightbox-content div {
     display: flex;
