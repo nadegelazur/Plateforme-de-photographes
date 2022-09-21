@@ -66,7 +66,7 @@
     padding-left: 8px;
     transition: all 0.3s ease-out;
 }
-#textArea {
+#textarea {
     top: -10%;
 }
 ::placeholder {
@@ -85,7 +85,7 @@
     transition: border 0.2s ease-out;
 }
 
-#textarea {
+#message {
     height: 170px;
 }
 #send_button {

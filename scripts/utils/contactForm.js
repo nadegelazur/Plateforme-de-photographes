@@ -204,7 +204,7 @@ function emailVerify (email) {
 }
 
 // Verification message
-const textMessage = document.getElementById('textarea')
+const textMessage = document.getElementById('message')
 const textMessageInputPlaceholder = textMessage.placeholder
 textMessage.addEventListener('keyup', e => {
   textMessage_verify(textMessage)
