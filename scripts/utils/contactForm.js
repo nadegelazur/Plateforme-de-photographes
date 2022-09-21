@@ -264,11 +264,11 @@ document.addEventListener('keyup', (e) => {
     modal.style.display = 'none'
   }
   if (e.key === 'ArrowDown') {
-    console.log('down')
+    // console.log('down')
     document.querySelector('.i-2').focus()
   }
   if (e.key === 'ArrowUp') {
-    console.log('up')
+    // console.log('up')
     document.querySelector('.i-1').focus()
   }
 })

@@ -10,7 +10,7 @@ const params = new URLSearchParams(document.location.search)
 const idParams = params.get('id')
 
 // getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-End-Fisheye/main/data/photographers.json')
-getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-End-Fisheye/main/data/photographers.json')
+getData('../../data/photographers.json')
   .then(
     response => {
       // Etape 1: Recuperer Profil
@@ -45,28 +45,9 @@ getData('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-E
           mediaFactory(media)
         }
       })
-
-      // listPhotographers.forEach(element => {
-      //     console.log(element)
-      //     let section = document.getElementsByClassName("photographer-section")[0];
-      //     let art = photographerFactory(element).getUserCardDOM();
-
-      //     section.appendChild(art);
-
-      // });
-
-      // console.log(listMediaOfPhotographer)
-
-      // J'affiche mes elements au DOM
-
-      // 2. liste des medias
-      // getMedias(idParams, myPhotgrapher, listMediaOfPhotographer)
-
       calculTotalLike()
-
       LightBox.init()
     }
-
   )
 
 // btn filter by popularity
@@ -75,6 +56,11 @@ const btnPopularity = document.getElementById('popularity')
 btnPopularity.addEventListener('click', () => {
   sortByPopularity()
 })
+btnPopularity.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    sortByPopularity()
+  }
+})
 
 // btn filter by title
 const btnTitle = document.getElementById('titre')
@@ -82,34 +68,76 @@ const btnTitle = document.getElementById('titre')
 btnTitle.addEventListener('click', () => {
   sortByTitle()
 })
-
+btnTitle.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    sortByTitle()
+  }
+})
 // btn filter by date
 const btnDate = document.getElementById('date')
 
 btnDate.addEventListener('click', () => {
   sortByDate()
 })
+btnDate.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    sortByDate()
+  }
+  if (e.key === 'Tab') {
+    filterMenu.classList.remove('open-menu')
+    arrow.classList.remove('active')
+  }
+})
 
 const filterBy = document.querySelector('.dd-button')
 const filterMenu = document.querySelector('.dd-menu')
 const arrow = document.querySelector('.arrow')
 
-// const listbox = document.querySelector('[role="listbox"]')
+document.addEventListener('click', showDropdown)
 
-let previousActiveElement
-
-filterBy.addEventListener('click', function () {
-  showDropdown()
-})
-filterBy.addEventListener('keydown', showDropdown)
-
-arrow.addEventListener('click', showDropdown)
-arrow.addEventListener('keydown', showDropdown)
-
-function showDropdown () {
-  filterMenu.classList.toggle('open-menu')
-  arrow.classList.toggle('active')
-  previousActiveElement = document.activeElement
-  console.log(previousActiveElement)
-  document.querySelector('popularity').focus()
+function showDropdown (event) {
+  // console.log(event.target)
+  if (event.target.closest('.dd-button')) {
+    filterMenu.classList.toggle('open-menu')
+    arrow.classList.toggle('active')
+  }
+  if (!event.target.closest('.dd-button')) {
+    filterMenu.classList.remove('open-menu')
+    arrow.classList.remove('active')
+  }
 }
+
+filterBy.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    filterMenu.classList.toggle('open-menu')
+    arrow.classList.toggle('active')
+  }
+  if (e.code === 'Escape') {
+    filterMenu.classList.remove('open-menu')
+    arrow.classList.remove('active')
+  }
+  // if (e.key === 'ArrowDown') {
+  //   console.log('down')
+  //   document.querySelectorAll('#popularity').focus()
+
+  // }
+  // if (e.key === 'ArrowUp') {
+  //   console.log('up')
+  // }
+})
+// document.addEventListener('keyup', function (event) {
+//   // console.log(event.code)
+//   if (event.code === 'Escape') {
+//     filterMenu.classList.remove('open-menu')
+//     arrow.classList.remove('active')
+//   }
+// })
+//* Likes KeyboardNavigation * /
+
+// const iconDiv = document.querySelector('.icon-div')
+
+// iconDiv.addEventListener('keyup', (e) => {
+//   if (e.key === 'Enter') {
+//     console.log('Enter like')
+//   }
+// })

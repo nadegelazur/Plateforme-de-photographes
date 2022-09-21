@@ -4,17 +4,17 @@ export function photographerFactory (data, index) {
 
   const { id, name, portrait, city, country, tagline, price } = data
 
-  const picture = `assets/photographers/${portrait}`
+  // const picture = `assets/photographers/${portrait}`
+  const picture = `/photographers/${portrait}`
 
   function getUserCardDOM () {
     const article = document.createElement('article')
-    article.setAttribute('tabindex', index + 1)
     article.setAttribute('class', 'photo-profil')
     const lien = document.createElement('a')
 
     // Modifier par profil car page profil = profil.html
     lien.setAttribute('href', 'profil.html?id=' + id)
-
+    lien.setAttribute('tabindex', index + 1)
 
     const img = document.createElement('img')
     img.setAttribute('src', picture)

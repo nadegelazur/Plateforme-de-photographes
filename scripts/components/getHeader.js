@@ -27,7 +27,7 @@ export function getHeader (profils, id) {
   const myImg = document.createElement('img')
 
   myDiv2.setAttribute('class', 'profil-photo')
-  myImg.setAttribute('src', 'assets/photographers/' + profil.portrait)
+  myImg.setAttribute('src', '/photographers/' + profil.portrait)
   myImg.setAttribute('class', 'photo')
   myImg.setAttribute('alt', 'photo de profile')
 

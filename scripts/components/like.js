@@ -19,7 +19,9 @@ export function clickBtnLike (evt) {
   iconDiv.setAttribute('aria-label', 'liké')
   iconDiv.setAttribute('tabIndex', '0')
   iconDiv.setAttribute('role', 'button')
+
   iconDiv.addEventListener('click', (event) => clickBtnDislike(event))
+  
 
   const likeIcon = document.createElement('i')
   likeIcon.setAttribute('class', 'fa-solid fa-heart')
@@ -27,7 +29,7 @@ export function clickBtnLike (evt) {
 
   parentNode.appendChild(iconDiv)
 
-  calculTotalLike()
+  calculTotalLike(evt)
 }
 
 export function clickBtnDislike (evt) {
@@ -49,12 +51,12 @@ export function clickBtnDislike (evt) {
   iconDiv.setAttribute('aria-label', 'disliké')
   iconDiv.setAttribute('tabIndex', '0')
   iconDiv.setAttribute('role', 'button')
+
   iconDiv.addEventListener('click', (event) => clickBtnLike(event))
 
   const likeIcon = document.createElement('i')
   likeIcon.setAttribute('class', 'fa-regular fa-heart')
   iconDiv.appendChild(likeIcon)
-
   parentNode.appendChild(iconDiv)
 
   calculTotalLike()
@@ -62,7 +64,6 @@ export function clickBtnDislike (evt) {
 
 export function calculTotalLike () {
   const listSpan = document.getElementsByClassName('nb-likes')
-
   const listNbLike = [0]
 
   Array.from(listSpan).forEach(
@@ -71,17 +72,39 @@ export function calculTotalLike () {
       listNbLike.push(intNbLike)
     }
   )
-
   // console.log(listNbLike)
-
   const totatLike = listNbLike.reduce(
     (previousValue, currentValue) => previousValue + currentValue
   )
-
   document.getElementById('totalLike').innerHTML = ''
-
-  // document.getElementById("totalLike").innerHTML = totatLike + " Nb Like Total"
   document.getElementById('totalLike').innerHTML = totatLike
 
   return totatLike
 }
+
+// document.addEventListener('keyup', (evt) => {
+//   if (evt.key === 'Enter') {
+//     const active = document.activeElement
+//     console.log(active)
+//     const parentNode = active.parentNode
+//     const nbLike = parentNode.firstChild.textContent
+//     const nbLikeInt = parseInt(nbLike)
+
+//     parentNode.firstChild.innerHTML = nbLikeInt + 1
+
+//     // On supprime le coeur vide
+//     active.remove()
+//     const iconDiv = document.createElement('div')
+//     iconDiv.setAttribute('class', 'icon-div')
+//     iconDiv.setAttribute('aria-label', 'liké')
+//     iconDiv.setAttribute('tabIndex', '0')
+//     iconDiv.setAttribute('role', 'button')
+//     const likeIcon = document.createElement('i')
+//     likeIcon.setAttribute('class', 'fa-solid fa-heart')
+//     iconDiv.appendChild(likeIcon)
+
+//     parentNode.appendChild(iconDiv)
+
+//     calculTotalLike(evt)
+//   }
+// })
