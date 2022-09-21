@@ -18,6 +18,7 @@ export function photographerFactory (data, index) {
 
     const img = document.createElement('img')
     img.setAttribute('src', picture)
+    img.setAttribute('alt', 'photo de profil')
     img.setAttribute('role', 'link')
     const h2 = document.createElement('h2')
     h2.textContent = name
