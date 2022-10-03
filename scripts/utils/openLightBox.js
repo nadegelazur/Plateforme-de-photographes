@@ -1,11 +1,15 @@
 export class LightBox {
   static init () {
-    // const generatedMedia = Array.from(document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]'))
-    // console.log(generatedMedia);
-
-    // let test = generatedMedia[0].firstChild.getAttribute('alt');
-    // console.log(test)
-
+    const generateLightBox = Array.from(document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]'))
+    console.log(generateLightBox);
+  
+    generateLightBox.forEach(item => item.addEventListener('click', e => {
+        // console.log('openLightbox')
+        e.preventDefault()
+        const beforeElementFocus = document.activeElement;
+        const title = e.currentTarget.getAttribute('alt')
+        new LightBox(e.currentTarget.getAttribute('src'), title)
+    }))
     // const tabLinks = generatedMedia.map((media) => media.getAttribute('href'))
     // console.log(tabLinks)
 
@@ -14,15 +18,6 @@ export class LightBox {
     // const titles = generateTitles.map((title) => title.textContent)
     // console.log(titles)
 
-    document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')
-      .forEach(link => link.addEventListener('click', e => {
-        // console.log('ok')
-        e.preventDefault()
-        // const beforeElementFocus = document.activeElement;
-        const title = e.currentTarget.firstChild.getAttribute('alt')
-        // eslint-disable-next-line no-new
-        new LightBox(e.currentTarget.getAttribute('href'), title)
-      }))
 
     // for(let i = 0; i < generatedMedia.length; i++) {
     //     const media = generatedMedia[i];
@@ -34,24 +29,21 @@ export class LightBox {
     //     });
     // }
   }
-
-  /**
+/**
  * @param {string} url URL de l'image/video
  */
   constructor (url, title, beforeElementFocus) {
-    this.element = this.buildDom(url, title)
+    this.element = this.buildDOM(url, title)
+    this.onKeyUp = this.onKeyUp.bind(this)
     document.body.appendChild(this.element)
+    
     // creation des listeners
     this.closeBtn()
     this.nextBtn()
     this.preventBtn()
-
+  
     this.beforeElementFocus = beforeElementFocus
     // this.element.focus();
-
-    this.leftArrow = document.querySelector('.lightbox__prev')
-    this.rightArrow = document.querySelector('.lightbox__next')
-    this.closeIcon = document.querySelector('.lightbox__close')
 
     this.keyboardNav()
   }
@@ -59,7 +51,6 @@ export class LightBox {
   keyboardNav () {
     window.addEventListener('keyup', (e) => {
       if (e.key === 'Escape') {
-        // document.getElementsByClassName('lightbox')[0].remove()
         document.querySelector('.lightbox').remove()
       } else if (e.key === 'ArrowLeft') {
         this.prevent()
@@ -72,12 +63,20 @@ export class LightBox {
       }
     })
   }
-
+  
+  closeBtn () {
+    const btnClose = document.querySelector('.lightbox__close')
+    btnClose.addEventListener('click', function (e) {
+      e.preventDefault()
+      document.querySelector('.lightbox').remove()
+      document.removeEventListener('keyup', this.onKeyUp)
+    })
+  }
   /**
  * @param {string} url URL de l'image/video
  * @return {HTMLElement}
  */
-  buildDom (url, title) {
+  buildDOM (url, title) {
     const dom = document.createElement('div')
     dom.classList.add('lightbox')
     dom.setAttribute('aria-label', "vue rapprochée de l'image`")
@@ -91,8 +90,8 @@ export class LightBox {
                 </div>   
                 <div class="lightbox-content">
                     <div>
-                        <img src="` + url + `" alt="" id="currentMedia">
-                        <h3 id="currentTitle">` + title + `<h3>
+                        <img src="${url}" alt="" id="currentMedia">
+                        <h3 id="currentTitle">${title}<h3>
                     </div>
                 </div> 
                 <div class="lightbox-right">
@@ -106,12 +105,12 @@ export class LightBox {
                 </div>
                 <div class="lightbox-content">
                     <div>
-                        <video aria-label="` + title + `" controls="">
-                            <source src="` + url + `"
+                        <video aria-label="${title}" controls="">
+                            <source src="${url}"
                                     type="video/mp4" id="currentMedia">
                             Sorry, your browser doesn't support embedded videos.
                         </video>
-                        <h3 id="currentTitle">` + title + `<h3>
+                        <h3 id="currentTitle">${title}<h3>
                     </div>
                 </div>
                 <div class="lightbox-right">
@@ -125,36 +124,32 @@ export class LightBox {
   nextBtn () {
     const btnNext = document.getElementsByClassName('lightbox__next')[0]
     btnNext.addEventListener('click', function () {
-      this.next()
-    })
+      console.log('next')
+    
+     })
   }
 
   preventBtn () {
     const btnPrev = document.getElementsByClassName('lightbox__prev')[0]
     btnPrev.addEventListener('click', function (e) {
-      this.prevent()
+      console.log('previous')
+      // this.prevent()
     })
   }
 
-  closeBtn () {
-    const btnClose = document.getElementsByClassName('lightbox__close')[0]
-    btnClose.addEventListener('click', function (e) {
-      e.preventDefault()
-      // document.getElementsByClassName('lightbox')[0].remove()
-      document.querySelector('.lightbox').remove()
-    })
-  }
+  
 
   prevent () {
+    console.log('previous')
     let prevMedia = ''
     const media = document.getElementById('currentMedia')
     let currentUrl = media.getAttribute('src')
-    const list = document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')
+    const list = document.querySelectorAll('img[scr$=".jpg"], video[src$=".mp4"]')
 
     list.forEach((link, index) => {
-      if (link.getAttribute('href') == currentUrl && index > 0) {
-        const linkMedia = document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')[index - 1]
-        prevMedia = document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')[index - 1].getAttribute('href')
+      if (link.getAttribute('src') == currentUrl && index > 0) {
+        const linkMedia = document.querySelectorAll('img[scr$=".jpg"], video[src$=".mp4"]')[index - 1]
+        prevMedia = document.querySelectorAll('img[scr$=".jpg"], video[src$=".mp4"]')[index - 1].getAttribute('src')
         // console.log(linkMedia)
 
         if (prevMedia.includes('jpg')) {
@@ -205,63 +200,65 @@ export class LightBox {
   }
 
   next () {
-    let nextMedia = ''
-    const media = document.getElementById('currentMedia')
-    const currentUrl = media.getAttribute('src')
-    const list = document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')
+      let nextMedia = ''
+      const media = document.getElementById('currentMedia')
+      const currentUrl = media.getAttribute('src')
+      console.log(currentUrl)
+      const list = Array.from(document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]'))
+      console.log(list);
 
-    // let length = list.length - delete
-    list.forEach((link, index) => {
-      if (link.getAttribute('href') == currentUrl && index < list.length - 1) {
-        const linkMedia = document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')[index + 1]
-        nextMedia = document.querySelectorAll('a[href$=".jpg"], [href$=".mp4"]')[index + 1].getAttribute('href')
-        if (nextMedia.includes('jpg')) {
-          const container = document.getElementsByClassName('lightbox-content')
-          let child = container[0].lastElementChild
-          while (child) {
-            container[0].removeChild(child)
-            child = container[0].lastElementChild
+      // let length = list.length - delete
+      list.forEach((link, index) => {
+        if (link.getAttribute('scr') == currentUrl && index < list.length - 1) {
+          const linkMedia = document.querySelectorAll('img[scr$=".jpg"], video[src$=".mp4"]')[index + 1]
+          nextMedia = document.querySelectorAll('img[scr$=".jpg"], video[src$=".mp4"]')[index + 1].getAttribute('src')
+          if (nextMedia.includes('jpg')) {
+            const container = document.getElementsByClassName('lightbox-content')
+            let child = container[0].lastElementChild
+            while (child) {
+              container[0].removeChild(child)
+              child = container[0].lastElementChild
+            }
+            const div = document.createElement('div')
+            const img = document.createElement('img')
+            const h3 = document.createElement('h3')
+            h3.textContent = linkMedia.firstChild.getAttribute('alt')
+
+            img.setAttribute('src', nextMedia)
+            img.setAttribute('id', 'currentMedia')
+            container[0].appendChild(div)
+            div.appendChild(img)
+            div.appendChild(h3)
+          } else {
+            const container = document.getElementsByClassName('lightbox-content')
+            let child = container[0].lastElementChild
+            while (child) {
+              container[0].removeChild(child)
+              child = container[0].lastElementChild
+            }
+            const div = document.createElement('div')
+            const video = document.createElement('video')
+
+            div.appendChild(video)
+
+            video.setAttribute('controls', '0')
+            video.setAttribute('aria-label', "vue rapprochée de l'image")
+
+            const source = document.createElement('source')
+            source.setAttribute('src', nextMedia)
+            source.setAttribute('type', 'video/mp4')
+            source.setAttribute('id', 'currentMedia')
+            video.appendChild(source)
+
+            const h3 = document.createElement('h3')
+            h3.textContent = linkMedia.firstChild.getAttribute('alt')
+
+            container[0].appendChild(div)
+
+            div.appendChild(h3)
+            video.play()
           }
-          const div = document.createElement('div')
-          const img = document.createElement('img')
-          const h3 = document.createElement('h3')
-          h3.textContent = linkMedia.firstChild.getAttribute('alt')
-
-          img.setAttribute('src', nextMedia)
-          img.setAttribute('id', 'currentMedia')
-          container[0].appendChild(div)
-          div.appendChild(img)
-          div.appendChild(h3)
-        } else {
-          const container = document.getElementsByClassName('lightbox-content')
-          let child = container[0].lastElementChild
-          while (child) {
-            container[0].removeChild(child)
-            child = container[0].lastElementChild
-          }
-          const div = document.createElement('div')
-          const video = document.createElement('video')
-
-          div.appendChild(video)
-
-          video.setAttribute('controls', '0')
-          video.setAttribute('aria-label', "vue rapprochée de l'image")
-
-          const source = document.createElement('source')
-          source.setAttribute('src', nextMedia)
-          source.setAttribute('type', 'video/mp4')
-          source.setAttribute('id', 'currentMedia')
-          video.appendChild(source)
-
-          const h3 = document.createElement('h3')
-          h3.textContent = linkMedia.firstChild.getAttribute('alt')
-
-          container[0].appendChild(div)
-
-          div.appendChild(h3)
-          video.play()
         }
-      }
-    })
+      })
   }
 }

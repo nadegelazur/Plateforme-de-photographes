@@ -1,46 +1,27 @@
-// construction d'un article qui contiens photo de photograph avec info supplementaire
-export function photographerFactory (data, index) {
-  // console.log(data)
-
-  const { id, name, portrait, city, country, tagline, price } = data
-
-  // const picture = `assets/photographers/${portrait}`
-  const picture = `/photographers/${portrait}`
-
-  function getUserCardDOM () {
-    const article = document.createElement('article')
-    article.setAttribute('class', 'photo-profil')
-    const lien = document.createElement('a')
-
-    // Modifier par profil car page profil = profil.html
-    lien.setAttribute('href', 'profil.html?id=' + id)
-    lien.setAttribute('tabindex', index + 1)
-
-    const img = document.createElement('img')
-    img.setAttribute('src', picture)
-    img.setAttribute('alt', 'photo de profil')
-    img.setAttribute('role', 'link')
-    const h2 = document.createElement('h2')
-    h2.textContent = name
-    const h3 = document.createElement('h3')
-    h3.textContent = city + ',' + country
-    const p = document.createElement('p')
-    p.textContent = tagline
-    const p1 = document.createElement('p')
-    p1.textContent = price + '/jours'
-
-    article.appendChild(lien)
-    lien.appendChild(img)
-    lien.appendChild(h2)
-    article.appendChild(h3)
-    article.appendChild(p)
-    article.appendChild(p1)
-
-    // console.log(article)
-    return (article)
+export class PhotographersFactory {
+  constructor (data) {
+    this.name = data.name
+    this.id = data.id
+    this.city = data.city
+    this.country = data.country
+    this.tagline = data.tagline
+    this.price = data.price
+    this.portrait = data.portrait
+    console.log(this.name)
+    console.log(this.portrait)
   }
 
-  // console.log(price)
-
-  return { id, name, picture, getUserCardDOM, city, country, tagline, price }
+  createHtml () {
+    return `
+      <article class="photo-profil">
+        <a href="photographer.html?id=${this.id}" tabindex="1">
+          <img src="${this.portrait}" alt="photo de profil" role="link">
+          <h2>${this.name}</h2>
+        </a>
+        <h3>${this.city} , ${this.country}</h3>
+        <p>${this.tagline}</p>
+        <p>${this.price}/jours</p>
+      </article>
+      `
+  }
 }

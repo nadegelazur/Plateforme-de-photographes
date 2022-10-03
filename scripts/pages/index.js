@@ -1,19 +1,19 @@
-import { getData } from '../pages/data.js'
-import { photographerFactory } from '../factories/photographer.js'
+import { getData } from '../utils/fetchApi.js'
+import { PhotographersFactory } from '../factories/photographer.js'
 
-getData('../../data/photographers.json')
-  .then(
-    response => {
-      // console.log(response)
-      let listPhotographers = []
-      listPhotographers = response.photographers
+const displayPhotographer = (photographers) => {
+  const photographerSection = document.querySelector('.photographer-section')
+  photographers.forEach(photographer => {
+    const photographerModel = new PhotographersFactory(photographer)
+    photographerSection.innerHTML += photographerModel.createHtml()
+  })
+}
 
-      for (let i = 0; i < listPhotographers.length; i++) {
-        console.log(listPhotographers[i])
-        const section = document.getElementsByClassName('photographer-section')[0]
-        const art = photographerFactory(listPhotographers[i], i).getUserCardDOM()
-        section.appendChild(art)
-        console.log(art)
-      }
-    }
-  )
+const init = async () => {
+  const { photographers, media } = await getData('../../data/photographers.json')
+  console.log(photographers)
+  console.log(media)
+  displayPhotographer(photographers)
+}
+
+init()

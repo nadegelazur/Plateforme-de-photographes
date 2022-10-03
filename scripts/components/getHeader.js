@@ -57,8 +57,8 @@ export function getHeader (profils, id) {
   divPrixJour.appendChild(spanPrixJour)
   spanPrixJour.textContent = `${profil.price} /jours`
 
-  const iconLike = document.createElement('i')
-  iconLike.setAttribute('class', 'fa-solid fa-heart')
+  const iconLike = document.createElement('div')
+  iconLike.setAttribute('class', 'like-total')
 
   divInfoLikes.appendChild(span)
   divInfoLikes.appendChild(iconLike)

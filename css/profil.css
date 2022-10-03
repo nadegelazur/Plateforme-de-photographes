@@ -244,6 +244,9 @@ aside > div {
     justify-content: space-between;
     gap: 10px;
 }
+.photograph-content article {
+    position: relative;
+}
 
 .photograph-content img,
 .photograph-content video {
@@ -275,8 +278,10 @@ img.hover-shadow {
     font-size: 24px;
     line-height: 31px;
     color: #911C1C;
+    margin-right: 8px;
 }
-.icon-div {
+/*** Like ***/
+/* .icon-div {
     padding-left: 5px;
     display: flex;
     justify-content: center;
@@ -286,21 +291,40 @@ img.hover-shadow {
 .icon-div i{
     color: #911C1C;
     font-size: 21px;
+} */
+
+.like-no {
+    background: url("../assets/logo_icons/dislike.svg") no-repeat;
+    width: 25px;
+    height: 25px;
+}
+.like-yes {
+    background: url("../assets/logo_icons/like.svg") no-repeat;
+    width: 25px;
+    height: 25px;
+}
+.like-total {
+    background: url("../assets/logo_icons/solidlike.svg") no-repeat;
+    color: black !important;
+    width: 25px;
+    height: 25px;
 }
  
 
+
 /*** Video ***/ 
-.article-video,
-.article-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} 
 .play-circle {
     font-size: 42px;
-    color: #901C1C; 
-    position: absolute;  
+    color: #901C1C;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 } 
+.play-circle:hover {
+    cursor: pointer;
+}
+}
 
 
 /**** animation ****/

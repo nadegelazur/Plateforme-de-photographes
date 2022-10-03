@@ -39,7 +39,8 @@ function openModal () {
   logo.style.display = 'none'
   document.body.classList.toggle('_lock')
   previousActiveElement = document.activeElement
-  console.log(previousActiveElement)
+  // console.log(previousActiveElement)
+  
   // теперь мы проходимся по всем элементам вообще на странице и у них сделать inert = true а у modal сделать inert = false чтобы вся страница была не активной а именно modal когда мы в нём был активен
   // Array.from(body.children).forEach((child) => {
   //   if (child !== modalForm) {
