@@ -34,7 +34,6 @@ export class LightBox {
  */
   constructor (url, title, beforeElementFocus) {
     this.element = this.buildDOM(url, title)
-    this.onKeyUp = this.onKeyUp.bind(this)
     document.body.appendChild(this.element)
     
     // creation des listeners
