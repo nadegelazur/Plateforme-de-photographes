@@ -3,7 +3,6 @@ import { getHeader } from '../components/getHeader.js'
 import { MediasFactory } from '../factories/media.js'
 import { listenForLikes } from '../components/like.js'
 import { initFilter } from '../components/filter.js'
-// import { initLightbox} from '../utils/openLightBox.js'
 import { LightBox } from '../utils/openLightBox.js'
 
 

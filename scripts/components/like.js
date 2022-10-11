@@ -11,6 +11,15 @@ export const listenForLikes = () => {
         removeLike(event.target)
       }
     })
+    like.addEventListener('keyup', (event) => {
+      event.target.classList.toggle('like-no')
+      event.target.classList.toggle('like-yes')
+      if (event.target.classList.contains('like-yes')) {        
+        addLike(event.target)
+      } else {       
+        removeLike(event.target)
+      }
+    })
   })
 }
 const addLike = (elem) => {
