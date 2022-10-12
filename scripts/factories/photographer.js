@@ -15,7 +15,7 @@ export class PhotographersFactory {
     return `
       <article class="photo-profil">
         <a href="photographer.html?id=${this.id}" tabindex="1">
-          <img src="${this.portrait}" alt="photo de profil" role="link">
+          <img src="${this.portrait}" alt="photo de ${this.name} " role="link">
           <h2>${this.name}</h2>
         </a>
         <h3>${this.city} , ${this.country}</h3>
