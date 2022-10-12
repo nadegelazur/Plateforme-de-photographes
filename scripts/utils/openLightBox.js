@@ -9,7 +9,7 @@ export class LightBox {
         e.preventDefault()
         const beforeElementFocus = document.activeElement;
         const title = e.currentTarget.getAttribute('alt')
-        console.log(title)
+        //console.log(title)
         new LightBox(e.currentTarget.getAttribute('src'), title)
     }))
     
@@ -101,11 +101,11 @@ export class LightBox {
   }
 
   nextBtn () {
-    console.log('nextBTN')
+    //console.log('nextBTN')
     const btnNext = document.querySelector('.lightbox__next')
     
     btnNext.addEventListener('click', function (e) {
-      console.log('next')
+      //console.log('next')
       // e.preventDefault()
       let nextMedia = " "
       const media = document.getElementById('currentMedia')
@@ -119,38 +119,53 @@ export class LightBox {
         if (link.getAttribute('src') == currentUrl && index < length - 1) {
           console.log(link, index)
           const nextMedia = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index + 1].getAttribute('src')
+          console.log(nextMedia)
           const newTitle = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index + 1].getAttribute('alt')
+          console.log(newTitle)
           if (nextMedia.includes('jpg')) {
-            const container = document.getElementsByClassName('lightbox-content')
-            let h3Title = container[0].lastElementChild
-            // console.log(container);
-            console.log(h3Title)
-            h3Title.innerHTML = newTitle
-            const image = container[0].firstElementChild
-            image.setAttribute('src', nextMedia)
-          } else {
-            const container = document.getElementsByClassName('lightbox-content')
-            console.log(container)
+            const container = document.getElementsByClassName('lightbox-content')[0]
+            const currentImage = container.firstElementChild
+            const currentTitle = container.lastElementChild
+            container.removeChild(currentImage)
+            container.removeChild(currentTitle)
+            
+            const img = document.createElement('img')
+            img.setAttribute('src', nextMedia)
+            img.setAttribute('id', 'currentMedia')
+
+            const h3 = document.createElement('h3')
+            h3.innerText = newTitle
+            container.appendChild(img)
+            container.appendChild(h3)
+            
+          } else if (nextMedia.includes('mp4')) {
+            console.log('video ok')
+            const container = document.getElementsByClassName('lightbox-content')[0]
+            const currentImage = container.firstElementChild
+            const currentTitle = container.lastElementChild
+            container.removeChild(currentImage)
+            container.removeChild(currentTitle)
+
+            const video = document.createElement('video')
+            video.setAttribute('controls', '')
+            video.setAttribute('aria-label', "vue rapprochée de l'image")
+            const source = document.createElement('source')
+            source.setAttribute('src', nextMedia)
+            source.setAttribute('type', 'video/mp4')
+            source.setAttribute('id', 'currentMedia')
+            video.appendChild(source)
+
+            const h3 = document.createElement('h3')
+            h3.innerText = newTitle
+
+            container.appendChild(video)
+            container.appendChild(h3)
           }
-          // if (nextMedia.includes('mp4')) {
-          //   const container = document.querySelector('.lightbox-content video')
-          //   const video = container.nextElementSibling
-
-          //   console.log(video)
-          //   // let h3Title = container[0].lastElementChild
-          //   console.log(container);
-          //   //console.log(h3Title)
-          //   //h3Title.innerHTML = newTitle
-          //   console.log('video')
-          // }
-
         }
       })
      })
   }
-
   preventBtn () {
-    console.log('preventBTN')
     const btnPrev = document.querySelector('.lightbox__prev')
     btnPrev.addEventListener('click', function (e) {
       console.log('previous')
@@ -168,166 +183,48 @@ export class LightBox {
           const prevMedia = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index - 1].getAttribute('src')
           const newTitle = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index - 1].getAttribute('alt')
           if (prevMedia.includes('jpg')) {
-            const container = document.getElementsByClassName('lightbox-content')
-            let h3Title = container[0].lastElementChild
-            // console.log(container);
-            console.log(h3Title)
-            h3Title.innerHTML = newTitle
-            const image = container[0].firstElementChild
-            image.setAttribute('src', prevMedia)
-          }
+            const container = document.getElementsByClassName('lightbox-content')[0]
+            const currentImage = container.firstElementChild
+            const currentTitle = container.lastElementChild
+            container.removeChild(currentImage)
+            container.removeChild(currentTitle)
+            
+            const img = document.createElement('img')
+            img.setAttribute('src', prevMedia)
+            img.setAttribute('id', 'currentMedia')
+
+            const h3 = document.createElement('h3')
+            h3.innerText = newTitle
+            container.appendChild(img)
+            container.appendChild(h3)
+          } else if (prevMedia.includes('mp4')) {
+            console.log('video ok')
+            const container = document.getElementsByClassName('lightbox-content')[0]
+            const currentImage = container.firstElementChild
+            const currentTitle = container.lastElementChild
+            container.removeChild(currentImage)
+            container.removeChild(currentTitle)
+
+            const video = document.createElement('video')
+            video.setAttribute('controls', '')
+            video.setAttribute('aria-label', "vue rapprochée de l'image")
+            const source = document.createElement('source')
+            source.setAttribute('src', prevMedia)
+            source.setAttribute('type', 'video/mp4')
+            source.setAttribute('id', 'currentMedia')
+            video.appendChild(source)
+
+            const h3 = document.createElement('h3')
+            h3.innerText = newTitle
+
+            container.appendChild(video)
+            container.appendChild(h3)
+          } 
         }
-      })
-     
+      })    
     })
   }
-
-  
-
-  // prevent () {
-  //   console.log('preventBTN')
-  //   console.log('previous')
-  //   let prevMedia = ''
-  //   const media = document.getElementById('currentMedia')
-  //   let currentUrl = media.getAttribute('src')
-  //   const list = document.querySelectorAll('img[scr$=".jpg"], video[src$=".mp4"]')
-
-  //   list.forEach((link, index) => {
-  //     if (link.getAttribute('src') == currentUrl && index > 0) {
-  //       const linkMedia = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index - 1]
-  //       prevMedia = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index - 1].getAttribute('src')
-  //       // console.log(linkMedia)
-
-  //       if (prevMedia.includes('jpg')) {
-  //         const container = document.getElementsByClassName('lightbox-content')
-  //         let child = container[0].lastElementChild
-  //         while (child) {
-  //           container[0].removeChild(child)
-  //           child = container[0].lastElementChild
-  //         }
-  //         const div = document.createElement('div')
-  //         const img = document.createElement('img')
-  //         //const h3 = document.createElement('h3')
-  //         //h3.textContent = linkMedia.firstChild.getAttribute('alt')
-  //         img.setAttribute('src', prevMedia)
-  //         img.setAttribute('id', 'currentMedia')
-  //         container[0].appendChild(div)
-  //         div.appendChild(img)
-  //         div.appendChild(h3)
-  //       } else {
-  //         const container = document.getElementsByClassName('lightbox-content')
-  //         let child = container[0].lastElementChild
-  //         while (child) {
-  //           container[0].removeChild(child)
-  //           child = container[0].lastElementChild
-  //         }
-  //         const div = document.createElement('div')
-  //         const video = document.createElement('video')
-  //         const source = document.createElement('source')
-
-  //         //const h3 = document.createElement('h3')
-  //         //h3.textContent = linkMedia.firstChild.getAttribute('alt')
-
-  //         video.setAttribute('controls', '')
-  //         video.setAttribute('aria-label', "vue rapprochée de l'image")
-  //         source.setAttribute('src', prevMedia)
-  //         source.setAttribute('type', 'video/mp4')
-  //         source.setAttribute('id', 'currentMedia')
-
-  //         container[0].appendChild(div)
-  //         div.appendChild(video)
-  //         //div.appendChild(h3)
-  //         video.appendChild(source)
-  //         // video.play();
-  //       }
-  //     }
-  //   })
-  //   currentUrl = prevMedia
-  // }
-
-  // next () {
-  //     let nextMedia = ''
-  //     const media = document.getElementById('currentMedia')
-  //     const currentUrl = media.getAttribute('src')
-  //     console.log(currentUrl)
-  //     const list = Array.from(document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]'))
-  //     console.log(list);
-
-  //     // let length = list.length - delete
-  //     list.forEach((link, index) => {
-  //       if (link.getAttribute('scr') == currentUrl && index < list.length - 1) {
-  //         const linkMedia = document.querySelectorAll('img[scr$=".jpg"], video[src$=".mp4"]')[index + 1]
-  //         nextMedia = document.querySelectorAll('img[scr$=".jpg"], video[src$=".mp4"]')[index + 1].getAttribute('src')
-  //         if (nextMedia.includes('jpg')) {
-  //           const container = document.getElementsByClassName('lightbox-content')
-  //           let child = container[0].lastElementChild
-  //           while (child) {
-  //             container[0].removeChild(child)
-  //             child = container[0].lastElementChild
-  //           }
-  //           const div = document.createElement('div')
-  //           const img = document.createElement('img')
-  //           const h3 = document.createElement('h3')
-  //           h3.textContent = linkMedia.firstChild.getAttribute('alt')
-
-  //           img.setAttribute('src', nextMedia)
-  //           img.setAttribute('id', 'currentMedia')
-  //           container[0].appendChild(div)
-  //           div.appendChild(img)
-  //           div.appendChild(h3)
-  //         } else {
-  //           const container = document.getElementsByClassName('lightbox-content')
-  //           let child = container[0].lastElementChild
-  //           while (child) {
-  //             container[0].removeChild(child)
-  //             child = container[0].lastElementChild
-  //           }
-  //           const div = document.createElement('div')
-  //           const video = document.createElement('video')
-
-  //           div.appendChild(video)
-
-  //           video.setAttribute('controls', '0')
-  //           video.setAttribute('aria-label', "vue rapprochée de l'image")
-
-  //           const source = document.createElement('source')
-  //           source.setAttribute('src', nextMedia)
-  //           source.setAttribute('type', 'video/mp4')
-  //           source.setAttribute('id', 'currentMedia')
-  //           video.appendChild(source)
-
-  //           const h3 = document.createElement('h3')
-  //           h3.textContent = linkMedia.firstChild.getAttribute('alt')
-
-  //           container[0].appendChild(div)
-
-  //           div.appendChild(h3)
-  //           video.play()
-  //         }
-  //       }
-  //     })
-  // }
 }
 
 
 
-// else {
-//   const container = document.getElementsByClassName('lightbox-content')
-//   let h3Title = container[0].lastElementChild
-//   console.log(container);
-//   console.log(h3Title)
-//   h3Title.innerHTML = newTitle
-//   const video = document.createElement('video')
-
-  
-//   video.setAttribute('src', nextMedia)
-//   video.setAttribute('controls', '0')
-//   video.setAttribute('aria-label', "vue rapprochée de l'image")
-
-//   const source = document.createElement('source')
-//   source.setAttribute('src', nextMedia)
-//   source.setAttribute('type', 'video/mp4')
-//   source.setAttribute('id', 'currentMedia')
-//   video.appendChild(source)
-//   video.play()
-// }

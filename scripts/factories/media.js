@@ -52,8 +52,8 @@ class Video {
 
   createHtml () {
     return `
-    <article>
-        <video src="assets/medias/${this.photographerId}/${this.video}" tabindex="0" alt="Lonesome"></video>
+    <article class="mediaBox">
+        <video src="assets/medias/${this.photographerId}/${this.video}" tabindex="0" alt="${this.title}"></video>
         <span class="play-circle">
             <i class="fa-solid fa-circle-play"></i>
         </span>            
