@@ -2,8 +2,7 @@ export class LightBox {
   static init () {
     const generateLightBox = Array.from(document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]'))
     // console.log(generateLightBox);
-    
-  
+
     generateLightBox.forEach(item => item.addEventListener('click', e => {
         // console.log('openLightbox')
         e.preventDefault()
@@ -11,46 +10,45 @@ export class LightBox {
         const title = e.currentTarget.getAttribute('alt')
         //console.log(title)
         new LightBox(e.currentTarget.getAttribute('src'), title)
-    }))
-    
+    }))    
   }
   constructor (url, title, beforeElementFocus) {
     this.element = this.buildDOM(url, title)
-    document.body.appendChild(this.element)
-    
+    document.body.appendChild(this.element)  
     // creation des listeners
     this.closeBtn()
     this.nextBtn()
     this.preventBtn()
   
     this.beforeElementFocus = beforeElementFocus
-    // this.element.focus();
+    this.element.focus();
     
-    // this.keyboardNav()
+    this.keyboardNav()
   }
 
-  // keyboardNav () {
-  //   window.addEventListener('keyup', (e) => {
-  //     if (e.key === 'Escape') {
-  //       document.querySelector('.lightbox').remove()
-  //     } else if (e.key === 'ArrowLeft') {
-  //       this.prevent()
-  //     } else if (e.key === 'ArrowRight') {
-  //       this.next()
-  //     } else if (e.key === 'Tab' &&
-  //           this.closeIcon.contains(document.activeElement)) {
-  //       e.preventDefault()
-  //       document.querySelector('.lightbox__prev').focus()
-  //     }
-  //   })
-  // }
+  
+    keyboardNav () {
+      window.addEventListener('keyup', (e) => {
+        if (e.key === 'Escape') {
+          console.log('close')
+          closeBtn()
+          
+        } else if (e.key === 'ArrowRight') {
+          console.log('right')
+        } else if (e.key === 'ArrowLeft') {
+          console.log('left')
+        } else if (e.key === 'Enter') {
+          console.log('enter')
+        }
+      })
+    }
   
   closeBtn () {
     const btnClose = document.querySelector('.lightbox__close')
     btnClose.addEventListener('click', function (e) {
       e.preventDefault()
       document.querySelector('.lightbox').remove()
-      window.removeEventListener('keyup', this.keyboardNav)
+      document.removeEventListener('keyup', this.onKeyUp)
     })
   }
 
@@ -165,6 +163,7 @@ export class LightBox {
       })
      })
   }
+
   preventBtn () {
     const btnPrev = document.querySelector('.lightbox__prev')
     btnPrev.addEventListener('click', function (e) {
