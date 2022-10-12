@@ -8,7 +8,7 @@ export const initFilter = (listMediaOfPhotographer) => {
   const btnPopularity = document.getElementById('popularity')
   const btnTitle = document.getElementById('titre')
   const btnDate = document.getElementById('date')
-
+  // Filter by POPULARITY
   btnPopularity.addEventListener('click', () => { 
     // console.log('popularity')
     // console.log(listMediaOfPhotographer)
@@ -17,7 +17,15 @@ export const initFilter = (listMediaOfPhotographer) => {
     })
     updateMedia(listSortedByPopularity)
   })
-
+  btnPopularity.addEventListener('keyup', (e) => { 
+    if (e.key == 'Enter') {
+      const listSortedByPopularity = listMediaOfPhotographer.sort(function (a, b) {
+        return (b.likes - a.likes) 
+      })
+      updateMedia(listSortedByPopularity)
+    }
+  })
+  // Filter by TITLE
   btnTitle.addEventListener('click', () => {
     // console.log('title')
     const listSortedByTitle = listMediaOfPhotographer.sort(function(a,b) {
@@ -26,6 +34,15 @@ export const initFilter = (listMediaOfPhotographer) => {
     })
     updateMedia(listSortedByTitle)
   })
+  btnTitle.addEventListener('keyup', (e) => {
+    if (e.key == 'Enter') {
+      const listSortedByTitle = listMediaOfPhotographer.sort(function(a,b) {
+        if (a.title < b.title) return -1
+      })
+      updateMedia(listSortedByTitle)
+    } 
+  })
+  // Filter by DATE
   btnDate.addEventListener('click', () => {
     // console.log('date')
     const listSortedByDate = listMediaOfPhotographer.sort(function(a,b) {
@@ -33,6 +50,22 @@ export const initFilter = (listMediaOfPhotographer) => {
     })
     // console.log(listSortedByDate)
     updateMedia(listSortedByDate)
+  })
+  btnDate.addEventListener('keyup', (e) => {
+    if (e.key == 'Enter') {
+      const listSortedByDate = listMediaOfPhotographer.sort(function(a,b) {
+        if (a.date > b.date) return -1
+      })
+      updateMedia(listSortedByDate)
+    }      
+  })
+  btnDate.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      const filterMenu = document.querySelector('.dd-menu')
+      filterMenu.classList.remove('open-menu')
+      const arrow = document.querySelector('.dd-button__arrow')
+      arrow.classList.remove('active')
+    }
   })
   filterBy.addEventListener('click', showDropdown)
 }
@@ -50,3 +83,21 @@ const showDropdown = (event) => {
       arrow.classList.remove('active')
     }
 }
+
+// *** KEYBOARD NAVIGATION *** //
+
+const filterBy = document.querySelector('.dd-button')
+filterBy.addEventListener('keyup', (e) => {
+  if (e.key == 'Enter') {
+    const filterMenu = document.querySelector('.dd-menu')
+    const arrow = document.querySelector('.arrow')
+    if (e.target.closest('.dd-button')) {
+      filterMenu.classList.toggle('open-menu')
+      arrow.classList.toggle('active')
+    }
+    if (!e.target.closest('.dd-button')) {
+      filterMenu.classList.remove('open-menu')
+      arrow.classList.remove('active')
+    }
+  } 
+})
