@@ -3,10 +3,12 @@
     --modal-duration: 0.8s;
 }
 /*** HEADER ***/
+
 .logo{
     display: block;
 }
 /*** MAIN ***/
+
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
@@ -35,6 +37,7 @@
     color: #525252;
 }
 /*** TOTAL LIKES ***/
+
 aside {
     display: block;
 }
@@ -85,59 +88,12 @@ aside > div {
     order: 2;
     
 }
- 
 .contact_button:hover,
 .send_button:hover {
     background-color: #710c0c;
 }
 /*** FILTERS ***/
-/* .photograph-filter {
-    display: flex;
-    font-size: 18px;
 
-.photograph-filter p {
-    font-weight: bold;
-    margin-top: 10px;
-}
-.dropdown {
-    position: relative;
-    line-height: 2.5;
-    list-style: none !important;
-    border: 1px solid #911C1C;
-    border-radius: 5px;
-    background: #911C1C;
-    color: #fff;
-    width: 170px;
-    height: 170px;
-    cursor: pointer;
-    margin: 9px;
-    padding: 11px 19px;
-    z-index: 2;    
-}
-    .dropdown-label {
-        position: absolute;
-    } 
-
-.dropdown__arrow {
-    position: absolute;
-    right: 21px;
-    top: 18%;
-    transition: transform 0.2s linear;
-}
-.dropdown__arrow .expanded {
-    transform: rotate(-180deg);
-}
-
-.dropdown__list {
-    list-style: none !important;
-}
-.dropdown__list li:nth-child(1),
-.dropdown__list li:nth-child(2) {
-    border-bottom: 1px solid #fff;
-}
-
-*/
-/* Dropdown */
 .photograph-filter {
     display: flex;
     padding: 20px 0px;
@@ -174,20 +130,6 @@ aside > div {
 .arrow.active {
     transform: rotate(-180deg);
 }
-.dd-button__arrow {}
-
-/* .dd-button:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 8px;
-    transform: translateY(-50%);
-    width: 0; 
-    height: 0; 
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid rgb(251, 249, 249);
-} */
 .dd-input {
     display: none;
 }
@@ -207,12 +149,6 @@ aside > div {
 .dd-menu.open-menu {
     display: block;
 }
-/*.dd-input + .dd-menu {
-    display: none;
-} 
- .dd-input:checked + .dd-menu {
-    display: block;
-} */
 .dd-menu ul {
     border: none;
 }
@@ -236,7 +172,8 @@ aside > div {
     border-bottom: 1px solid #cccccc;
 }
 
-/*** GALLERY IMAGES ***/
+/*** GALLERY IMAGES ***/ 
+
 .photograph-content { 
     margin-top: 40px;
     display: flex;
@@ -247,7 +184,6 @@ aside > div {
 .photograph-content article {
     position: relative;
 }
-
 .photograph-content img,
 .photograph-content video {
     object-fit: cover;
@@ -260,7 +196,6 @@ aside > div {
 img.hover-shadow {
     transition: 0.3s;
 }
-  
 .hover-shadow:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -280,18 +215,7 @@ img.hover-shadow {
     color: #911C1C;
     margin-right: 8px;
 }
-/*** Like ***/
-/* .icon-div {
-    padding-left: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-.icon-div i{
-    color: #911C1C;
-    font-size: 21px;
-} */
+/*** LIKES ***/
 
 .like-no {
     background: url("../assets/logo_icons/dislike.svg") no-repeat;
@@ -310,9 +234,8 @@ img.hover-shadow {
     height: 25px;
 }
  
+/*** VIDEO ***/ 
 
-
-/*** Video ***/ 
 .play-circle {
     font-size: 42px;
     color: #901C1C;
@@ -324,10 +247,8 @@ img.hover-shadow {
 .play-circle:hover {
     cursor: pointer;
 }
-}
 
-
-/**** animation ****/
+/**** ANIMATION ****/
 
 @keyframes modalopen {
     from {

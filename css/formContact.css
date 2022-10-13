@@ -101,8 +101,6 @@
     cursor: pointer;
     order: 2;
 }
-
-
 .visible {
     display: block!important;
 }

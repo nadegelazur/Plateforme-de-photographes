@@ -1,4 +1,5 @@
 /** LIGHTBOX **/
+
 .lightbox {
     display: flex; 
     position: fixed;
@@ -98,10 +99,6 @@
     object-fit: cover; 
 } 
 
-/* .lightbox-content h3 {
-    
-    margin-top: 10px;
-} */
 .lightbox .lightbox-content  h3 {
     position: relative;
     top: 10px;

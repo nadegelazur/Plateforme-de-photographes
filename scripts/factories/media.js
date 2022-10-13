@@ -24,6 +24,7 @@ class Image {
     this.likes = data.likes
     this.date = data.date
   }
+
   createHtml () {
     return `
         <article class="mediaBox">         
@@ -67,4 +68,3 @@ class Video {
     </article>`
   }
 }
-

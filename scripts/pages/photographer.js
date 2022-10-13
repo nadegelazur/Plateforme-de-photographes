@@ -28,12 +28,7 @@ const displayMediaPhotographer = (idPhotographer, media) => {
 
   initFilter(listMediaOfPhotographer)
 }
-// ** Keyboard Navigation ** //
-// const keyboard = () => {
-//   const ttt = document.querySelector('.lightbox')
-//   let test = document.activeElement()
-//   console.log(test)
-// }
+
 // *** init GLOBAL *** //
 const init = async () => {
   const idPhotographer = getPhotographerId()
@@ -44,11 +39,9 @@ const init = async () => {
 
   displayMediaPhotographer(idPhotographer, media)
 
-  listenForLikes();
+  listenForLikes()
 
-  // initLightbox();
   LightBox.init()
-  
 }
 
 init()

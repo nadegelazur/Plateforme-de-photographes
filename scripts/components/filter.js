@@ -1,26 +1,23 @@
-import { updateMedia } from '../pages/photographer.js' 
-
+import { updateMedia } from '../pages/photographer.js'
 
 export const initFilter = (listMediaOfPhotographer) => {
   const filterBy = document.querySelector('.dd-button')
   filterBy.addEventListener('click', showDropdown)
-  
+
   const btnPopularity = document.getElementById('popularity')
   const btnTitle = document.getElementById('titre')
   const btnDate = document.getElementById('date')
   // Filter by POPULARITY
-  btnPopularity.addEventListener('click', () => { 
-    // console.log('popularity')
-    // console.log(listMediaOfPhotographer)
+  btnPopularity.addEventListener('click', () => {
     const listSortedByPopularity = listMediaOfPhotographer.sort(function (a, b) {
-      return (b.likes - a.likes) 
+      return (b.likes - a.likes)
     })
     updateMedia(listSortedByPopularity)
   })
-  btnPopularity.addEventListener('keyup', (e) => { 
-    if (e.key == 'Enter') {
+  btnPopularity.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
       const listSortedByPopularity = listMediaOfPhotographer.sort(function (a, b) {
-        return (b.likes - a.likes) 
+        return (b.likes - a.likes)
       })
       updateMedia(listSortedByPopularity)
     }
@@ -28,36 +25,35 @@ export const initFilter = (listMediaOfPhotographer) => {
   // Filter by TITLE
   btnTitle.addEventListener('click', () => {
     // console.log('title')
-    const listSortedByTitle = listMediaOfPhotographer.sort(function(a,b) {
-      //if (a['title'] < b['title']) return -1
+    const listSortedByTitle = listMediaOfPhotographer.sort(function (a, b) {
       if (a.title < b.title) return -1
     })
     updateMedia(listSortedByTitle)
   })
   btnTitle.addEventListener('keyup', (e) => {
-    if (e.key == 'Enter') {
-      const listSortedByTitle = listMediaOfPhotographer.sort(function(a,b) {
+    if (e.key === 'Enter') {
+      const listSortedByTitle = listMediaOfPhotographer.sort(function (a, b) {
         if (a.title < b.title) return -1
       })
       updateMedia(listSortedByTitle)
-    } 
+    }
   })
   // Filter by DATE
   btnDate.addEventListener('click', () => {
     // console.log('date')
-    const listSortedByDate = listMediaOfPhotographer.sort(function(a,b) {
+    const listSortedByDate = listMediaOfPhotographer.sort(function (a, b) {
       if (a.date > b.date) return -1
     })
     // console.log(listSortedByDate)
     updateMedia(listSortedByDate)
   })
   btnDate.addEventListener('keyup', (e) => {
-    if (e.key == 'Enter') {
-      const listSortedByDate = listMediaOfPhotographer.sort(function(a,b) {
+    if (e.key === 'Enter') {
+      const listSortedByDate = listMediaOfPhotographer.sort(function (a, b) {
         if (a.date > b.date) return -1
       })
       updateMedia(listSortedByDate)
-    }      
+    }
   })
   btnDate.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
@@ -71,24 +67,23 @@ export const initFilter = (listMediaOfPhotographer) => {
 }
 
 const showDropdown = (event) => {
-    // console.log(event.target)
-    const filterMenu = document.querySelector('.dd-menu')
-    const arrow = document.querySelector('.arrow')
-    if (event.target.closest('.dd-button')) {
-      filterMenu.classList.toggle('open-menu')
-      arrow.classList.toggle('active')
-    }
-    if (!event.target.closest('.dd-button')) {
-      filterMenu.classList.remove('open-menu')
-      arrow.classList.remove('active')
-    }
+  const filterMenu = document.querySelector('.dd-menu')
+  const arrow = document.querySelector('.arrow')
+  if (event.target.closest('.dd-button')) {
+    filterMenu.classList.toggle('open-menu')
+    arrow.classList.toggle('active')
+  }
+  if (!event.target.closest('.dd-button')) {
+    filterMenu.classList.remove('open-menu')
+    arrow.classList.remove('active')
+  }
 }
 
 // *** KEYBOARD NAVIGATION *** //
 
 const filterBy = document.querySelector('.dd-button')
 filterBy.addEventListener('keyup', (e) => {
-  if (e.key == 'Enter') {
+  if (e.key === 'Enter') {
     const filterMenu = document.querySelector('.dd-menu')
     const arrow = document.querySelector('.arrow')
     if (e.target.closest('.dd-button')) {
@@ -99,5 +94,5 @@ filterBy.addEventListener('keyup', (e) => {
       filterMenu.classList.remove('open-menu')
       arrow.classList.remove('active')
     }
-  } 
+  }
 })
