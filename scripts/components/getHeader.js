@@ -55,7 +55,7 @@ export function getHeader (profils, id) {
 
   const spanPrixJour = document.createElement('span')
   divPrixJour.appendChild(spanPrixJour)
-  spanPrixJour.textContent = `${profil.price} /jours`
+  spanPrixJour.textContent = `${profil.price} € /jours`
 
   const iconLike = document.createElement('div')
   iconLike.setAttribute('class', 'like-total')

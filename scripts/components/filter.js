@@ -1,4 +1,5 @@
 import { updateMedia } from '../pages/photographer.js'
+import { listenForLikes } from './like.js'
 
 export const initFilter = (listMediaOfPhotographer) => {
   const filterBy = document.querySelector('.dd-button')
@@ -13,6 +14,7 @@ export const initFilter = (listMediaOfPhotographer) => {
       return (b.likes - a.likes)
     })
     updateMedia(listSortedByPopularity)
+    listenForLikes()
   })
   btnPopularity.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {
@@ -20,6 +22,7 @@ export const initFilter = (listMediaOfPhotographer) => {
         return (b.likes - a.likes)
       })
       updateMedia(listSortedByPopularity)
+      listenForLikes()
     }
   })
   // Filter by TITLE
@@ -29,6 +32,7 @@ export const initFilter = (listMediaOfPhotographer) => {
       if (a.title < b.title) return -1
     })
     updateMedia(listSortedByTitle)
+    listenForLikes()
   })
   btnTitle.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {
@@ -36,6 +40,7 @@ export const initFilter = (listMediaOfPhotographer) => {
         if (a.title < b.title) return -1
       })
       updateMedia(listSortedByTitle)
+      listenForLikes()
     }
   })
   // Filter by DATE
@@ -46,6 +51,7 @@ export const initFilter = (listMediaOfPhotographer) => {
     })
     // console.log(listSortedByDate)
     updateMedia(listSortedByDate)
+    listenForLikes()
   })
   btnDate.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {
@@ -53,6 +59,7 @@ export const initFilter = (listMediaOfPhotographer) => {
         if (a.date > b.date) return -1
       })
       updateMedia(listSortedByDate)
+      listenForLikes()
     }
   })
   btnDate.addEventListener('keydown', (e) => {
