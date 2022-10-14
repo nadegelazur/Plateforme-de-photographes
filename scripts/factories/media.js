@@ -2,11 +2,9 @@ export class MediasFactory {
   constructor (data) {
     // Si le type correspond à l'ancienne API, alors retourne-moi l'ancien formatage
     if (data.hasOwnProperty('image')) {
-    // console.log('image')
       return new Image(data)
     // Sinon retourne-moi le nouveau formatage
     } else if (data.hasOwnProperty('video')) {
-      // console.log('video')
       return new Video(data)
     // Une bonne pratique est de déclencher une erreur si le format n'est pas reconnu
     } else {

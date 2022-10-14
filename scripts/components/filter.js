@@ -27,7 +27,6 @@ export const initFilter = (listMediaOfPhotographer) => {
   })
   // Filter by TITLE
   btnTitle.addEventListener('click', () => {
-    // console.log('title')
     const listSortedByTitle = listMediaOfPhotographer.sort(function (a, b) {
       if (a.title < b.title) return -1
     })
@@ -45,11 +44,9 @@ export const initFilter = (listMediaOfPhotographer) => {
   })
   // Filter by DATE
   btnDate.addEventListener('click', () => {
-    // console.log('date')
     const listSortedByDate = listMediaOfPhotographer.sort(function (a, b) {
       if (a.date > b.date) return -1
     })
-    // console.log(listSortedByDate)
     updateMedia(listSortedByDate)
     listenForLikes()
   })

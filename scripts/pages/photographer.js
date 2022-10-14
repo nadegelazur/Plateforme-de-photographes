@@ -20,10 +20,8 @@ export const updateMedia = (media) => {
 }
 
 const displayMediaPhotographer = (idPhotographer, media) => {
-  // console.log(idPhotographer)
-  // console.log(media)
   const listMediaOfPhotographer = media.filter(media => media.photographerId == idPhotographer)
-  // console.log(listMediaOfPhotographer)
+
   updateMedia(listMediaOfPhotographer)
 
   initFilter(listMediaOfPhotographer)

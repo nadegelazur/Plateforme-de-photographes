@@ -8,7 +8,6 @@ async function getName () {
   const profils = objets.photographers
   // Current photographer
   const profil = profils.find(item => item.id == id)
-  // alert(profil.name);
 
   const modalHeader = document.querySelector('.modal-header')
   const h2 = document.createElement('h2')
@@ -39,15 +38,7 @@ function openModal () {
   logo.style.display = 'none'
   document.body.classList.toggle('_lock')
   previousActiveElement = document.activeElement
-  // console.log(previousActiveElement)
-  
-  // теперь мы проходимся по всем элементам вообще на странице и у них сделать inert = true а у modal сделать inert = false чтобы вся страница была не активной а именно modal когда мы в нём был активен
-  // Array.from(body.children).forEach((child) => {
-  //   if (child !== modalForm) {
-  //     child.setAttribute('aria-hidden', 'true')
-  //     child.inert = true
-  //   }
-  // })
+
   modal.inert = false
   modalForm.inert = false
   modal.setAttribute('aria-hidden', 'false')
@@ -105,9 +96,7 @@ function form_verify () {
 const prenom = document.getElementById('name')
 const prenomInputPlaceholder = prenom.placeholder
 prenom.focus()
-// setTimeout(() => {
-//     prenom.blur();
-// }, 5000);
+
 prenom.addEventListener('keyup', e => {
   prenom_verify(prenom)
 })
@@ -251,13 +240,6 @@ function setSuccess (input) {
 }
 
 const formInputs = document.querySelectorAll('.input-control')
-
-// keyboard events
-document.querySelector('.i-1').onkeydown = function (event) {
-  console.log('keydown')
-  console.log('code:' + event.code)
-  console.log('key:' + event.keyCode)
-}
 
 document.addEventListener('keyup', (e) => {
   // console.log(e)
