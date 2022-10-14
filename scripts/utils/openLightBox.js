@@ -1,28 +1,27 @@
 export class LightBox {
   static init () {
     const generateLightBox = Array.from(document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]'))
-    // console.log(generateLightBox);
-
     generateLightBox.forEach(item => item.addEventListener('click', e => {
       e.preventDefault()
-      const beforeElementFocus = document.activeElement
+      const beforeElementFocus = document.activeElement;
       const title = e.currentTarget.getAttribute('alt')
       new LightBox(e.currentTarget.getAttribute('src'), title)
       console.log(beforeElementFocus)
     }))
     generateLightBox.forEach(item => item.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
+      if (e.key == 'Enter') {
         e.preventDefault()
-        const beforeElementFocus = document.activeElement
+        const beforeElementFocus = document.activeElement;
         const title = e.currentTarget.getAttribute('alt')
         new LightBox(e.currentTarget.getAttribute('src'), title)
+        console.log(beforeElementFocus)
       }
     }))
   }
 
   constructor (url, title, beforeElementFocus) {
     this.element = this.buildDOM(url, title)
-    document.body.appendChild(this.element)
+    document.body.appendChild(this.element)  
     // creation des listeners
     this.closeBtn()
     this.nextBtn()
@@ -37,16 +36,18 @@ export class LightBox {
       if (e.key === 'Enter') {
         console.log('enter')
       } else if (e.key === 'Escape') {
+        console.log('close')
         document.querySelector('.lightbox').remove()
       } else if (e.key === 'ArrowRight') {
+        console.log('right')
         const btnNext = document.querySelector('.lightbox__next')
-        let nextMedia = ' '
+        let nextMedia = " "
         const media = document.getElementById('currentMedia')
         const currentUrl = media.getAttribute('src')
         const list = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')
-        const length = list.length
+        let length = list.length
         list.forEach((link, index) => {
-          if (link.getAttribute('src') === currentUrl && index < length - 1) {
+          if (link.getAttribute('src') == currentUrl && index < length - 1) {
             const nextMedia = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index + 1].getAttribute('src')
             const newTitle = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index + 1].getAttribute('alt')
             if (nextMedia.includes('jpg')) {
@@ -58,7 +59,6 @@ export class LightBox {
               const img = document.createElement('img')
               img.setAttribute('src', nextMedia)
               img.setAttribute('id', 'currentMedia')
-
               const h3 = document.createElement('h3')
               h3.innerText = newTitle
               container.appendChild(img)
@@ -88,10 +88,10 @@ export class LightBox {
           }
         })
       } else if (e.key === 'ArrowLeft') {
-        let prevMedia = ' '
+        let prevMedia = " "
         const media = document.getElementById('currentMedia')
         const currentUrl = media.getAttribute('src')
-        const list = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')         
+        const list = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')
         list.forEach((link, index) => {
           if (link.getAttribute('src') == currentUrl && index > 0) {
             const prevMedia = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index - 1].getAttribute('src')
@@ -161,8 +161,8 @@ export class LightBox {
                 </div>   
                 <div class="lightbox-content">
                     
-                        <img src= " ` + url + ` " alt= " ` + title + ` " id="currentMedia">
-                        <h3 id="currentTitle">` + title + `</h3>
+                        <img src="`+url+`" alt="`+title+`" id="currentMedia">
+                        <h3 id="currentTitle">`+title+`</h3>
                                      
                 </div> 
                 <div class="lightbox-right">
@@ -176,12 +176,12 @@ export class LightBox {
                 </div>
                 <div class="lightbox-content">
                     
-                        <video aria-label=" ` + title + ` " controls="">
-                            <source src=" ` + url + ` " alt=" `+ title + ` "
+                        <video aria-label="`+title+`" controls="">
+                            <source src="`+url+`" alt="`+title+`"
                                     type="video/mp4" id="currentMedia">
                             Sorry, your browser doesn't support embedded videos.
                         </video>
-                        <h3 id="currentTitle">` + title + `</h3>
+                        <h3 id="currentTitle">`+title+`</h3>
                    
                 </div>
                 <div class="lightbox-right">
@@ -195,13 +195,14 @@ export class LightBox {
   nextBtn () {
     const btnNext = document.querySelector('.lightbox__next')
     btnNext.addEventListener('click', function (e) {
-      let nextMedia = ''
+      let nextMedia = " "
       const media = document.getElementById('currentMedia')
       const currentUrl = media.getAttribute('src')
       const list = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')
-      const length = list.length
+
+      let length = list.length
       list.forEach((link, index) => {
-        if (link.getAttribute('src') === currentUrl && index < length - 1) {
+        if (link.getAttribute('src') == currentUrl && index < length - 1) {
           console.log(link, index)
           const nextMedia = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index + 1].getAttribute('src')
           console.log(nextMedia)
@@ -213,6 +214,7 @@ export class LightBox {
             const currentTitle = container.lastElementChild
             container.removeChild(currentImage)
             container.removeChild(currentTitle)
+
             const img = document.createElement('img')
             img.setAttribute('src', nextMedia)
             img.setAttribute('id', 'currentMedia')
@@ -253,13 +255,15 @@ export class LightBox {
     const btnPrev = document.querySelector('.lightbox__prev')
     btnPrev.addEventListener('click', function (e) {
       console.log('previous')
-      let prevMedia = ' '
+      let prevMedia = " "
       const media = document.getElementById('currentMedia')
+      console.log(media)
       const currentUrl = media.getAttribute('src')
+      console.log(currentUrl)
       const list = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')
-
+      console.log(list)
       list.forEach((link, index) => {
-        if (link.getAttribute('src') === currentUrl && index > 0) {
+        if (link.getAttribute('src') == currentUrl && index > 0) {
           console.log(link, index)
           const prevMedia = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index - 1].getAttribute('src')
           const newTitle = document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]')[index - 1].getAttribute('alt')
