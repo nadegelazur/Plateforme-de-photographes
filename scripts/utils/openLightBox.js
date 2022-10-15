@@ -1,3 +1,7 @@
+/* eslint-disable quotes */
+/* eslint-disable prefer-const */
+/* eslint-disable no-new */
+/* eslint-disable no-unused-vars */
 export class LightBox {
   static init () {
     const generateLightBox = Array.from(document.querySelectorAll('.mediaBox img[src$=".jpg"], video[src$=".mp4"]'))
@@ -10,7 +14,7 @@ export class LightBox {
     generateLightBox.forEach(item => item.addEventListener('keydown', e => {
       if (e.key === 'Enter') {
         e.preventDefault()
-        const beforeElementFocus = document.activeElement;
+        const beforeElementFocus = document.activeElement
         const title = e.currentTarget.getAttribute('alt')
         new LightBox(e.currentTarget.getAttribute('src'), title)
       }
@@ -195,7 +199,7 @@ export class LightBox {
               const currentTitle = container.lastElementChild
               container.removeChild(currentImage)
               container.removeChild(currentTitle)
-  
+
               const video = document.createElement('video')
               video.setAttribute('controls', '')
               video.setAttribute('aria-label', "vue rapprochée de l'image")
@@ -204,10 +208,10 @@ export class LightBox {
               source.setAttribute('type', 'video/mp4')
               source.setAttribute('id', 'currentMedia')
               video.appendChild(source)
-  
+
               const h3 = document.createElement('h3')
               h3.innerText = newTitle
-  
+
               container.appendChild(video)
               container.appendChild(h3)
             }

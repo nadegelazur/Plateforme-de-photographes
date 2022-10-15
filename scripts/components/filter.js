@@ -27,6 +27,7 @@ export const initFilter = (listMediaOfPhotographer) => {
   })
   // Filter by TITLE
   btnTitle.addEventListener('click', () => {
+    // eslint-disable-next-line array-callback-return
     const listSortedByTitle = listMediaOfPhotographer.sort(function (a, b) {
       if (a.title < b.title) return -1
     })
@@ -35,6 +36,7 @@ export const initFilter = (listMediaOfPhotographer) => {
   })
   btnTitle.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {
+      // eslint-disable-next-line array-callback-return
       const listSortedByTitle = listMediaOfPhotographer.sort(function (a, b) {
         if (a.title < b.title) return -1
       })
@@ -44,6 +46,7 @@ export const initFilter = (listMediaOfPhotographer) => {
   })
   // Filter by DATE
   btnDate.addEventListener('click', () => {
+    // eslint-disable-next-line array-callback-return
     const listSortedByDate = listMediaOfPhotographer.sort(function (a, b) {
       if (a.date > b.date) return -1
     })
@@ -52,6 +55,7 @@ export const initFilter = (listMediaOfPhotographer) => {
   })
   btnDate.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {
+      // eslint-disable-next-line array-callback-return
       const listSortedByDate = listMediaOfPhotographer.sort(function (a, b) {
         if (a.date > b.date) return -1
       })

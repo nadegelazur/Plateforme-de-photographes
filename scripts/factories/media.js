@@ -12,7 +12,6 @@ export class MediasFactory {
     }
   }
 }
-
 class Image {
   constructor (data) {
     this.id = data.id
@@ -37,7 +36,6 @@ class Image {
         </article>`
   }
 }
-
 class Video {
   constructor (data) {
     this.id = data.id
